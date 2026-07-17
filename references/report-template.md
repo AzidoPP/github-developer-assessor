@@ -1,100 +1,186 @@
-# GitHub Account Engineering Assessment
+# GitHub Developer Assessment v2
 
-## Scope
+## Scope and evidence boundary
 
-- Account: `[username](profile URL)`
-- Target role: `[role or general engineering]`
+- Account: `[username]`
+- Profile URL: `[URL]`
+- Snapshot date: `[YYYY-MM-DD]`
+- Time window: `[default: last 24 months; note lifetime evidence used separately]`
+- Depth: `[quick / standard / deep]`
+- Role lens: `[backend / frontend / AI / DevOps / systems / embedded / other]`
+- Assessment profile: `[general / senior-ic / staff / maintainer / high-potential / open-source-impact]`
 - Expected level: `[optional comparison target]`
-- Assessment depth: `[quick / standard / deep]`
-- Time window: `[period]`
-- Assessment date: `[date]`
+- Cohort: `[optional; define population, date, and sample size, or not assessed]`
+- Evidence boundary: `[public GitHub only, plus any explicitly listed external sources]`
 
 ## Executive assessment
 
-`One paragraph describing the strongest publicly demonstrated capabilities, the likely capability band, the most important caveat, and whether the evidence is role-relevant.`
+`In one paragraph, state the strongest demonstrated capability, capability band, role fit, attributable impact, trajectory, and the caveat most likely to change the result.`
 
-## Confidence
+## Result at a glance
 
-**Confidence: High / Medium / Low**
+| Axis | Score or status | Confidence | Interpretation | Strongest evidence |
+|---|---:|---|---|---|
+| Engineering capability (E) | /100 | | Criterion-referenced technical evidence | |
+| Stewardship and ownership (S) | /100 | | Sustained responsibility and contributor leverage | |
+| Ecosystem impact (I) | /100 or unknown | | Attributable adoption, authority, and leverage | |
+| Development trajectory (T) | /100 or unknown | | Direction of growth within the stated window | |
+| Technology scarcity (R) | /100, unknown, or not assessed | | Cohort-relative context; not capability | |
 
-Reason: `Explain the quantity, diversity, accessibility, and ambiguity of evidence.`
+- Capability band: `Exploratory / Contributor / Independent builder / System owner / Maintainer or technical leader`
+- Specialist modifier: `none / high-depth contributor / technical specialist`
+- Overall confidence: `High / Medium / Low ([0–1] if machine-readable output is used)`
+- Confidence basis: `coverage, attribution, sampling stability, and identity certainty`
 
-## Scorecard
+Do not replace this table with a single total.
 
-| Dimension | Score | Weight | Weighted result | Key evidence |
+## Engineering capability (E)
+
+| Subdimension | Anchor | Weight | Result | Evidence and reasoning |
 |---|---:|---:|---:|---|
-| Project ownership and delivery | /5 | 20 | /20 | |
-| Code quality and architecture | /5 | 20 | /20 | |
-| Problem solving and debugging | /5 | 15 | /15 | |
-| Testing, correctness, and reliability | /5 | 15 | /15 | |
-| Collaboration and code review | /5 | 10 | /10 | |
-| Maintenance and release discipline | /5 | 10 | /10 | |
-| Role relevance and technical depth | /5 | 10 | /10 | |
-| **Total** |  | **100** | **/100** | |
+| Implementation quality | /5 | 20 | /20 | |
+| Architecture and interfaces | /5 | 25 | /25 | |
+| Problem solving and debugging | /5 | 20 | /20 | |
+| Correctness and reliability | /5 | 20 | /20 | |
+| Constraint depth | /5 | 15 | /15 | |
+| **E** | | **100** | **/100** | |
 
-Capability band: `Exploratory / Contributor / Independent builder / System owner / Maintainer or technical leader`
+Explain any role-specific validation convention, such as hardware measurements, compiler regression suites, or production migration evidence.
 
-Do not include a total if evidence is inadequate in more than three dimensions.
+## Stewardship and ownership (S)
 
-## Representative projects
+| Subdimension | Anchor | Weight | Result | Evidence and reasoning |
+|---|---:|---:|---:|---|
+| Ownership and delivery | /5 | 30 | /30 | |
+| Maintenance and release | /5 | 25 | /25 | |
+| Collaboration and review | /5 | 25 | /25 | |
+| Governance and contributor leverage | /5 | 20 | /20 | |
+| **S** | | **100** | **/100** | |
 
-### 1. `[repository name](URL)`
+State whether the qualitative gate for the reported capability band is met. If E is high but S is sparse, use a specialist label instead of implying maintainership.
 
-- Classification: `personal-original / organization-contribution / external-contribution / other`
-- Demonstrated role: `What the account appears to own or contribute`
+## Ecosystem impact (I)
+
+Complete in standard and deep mode when evidence permits. Separate attention from adoption and multiply project influence by individual attribution.
+
+| Subdimension | Anchor | Weight | Result | Evidence and attribution |
+|---|---:|---:|---:|---|
+| Adoption | /5 | 30 | /30 | |
+| Downstream technical leverage | /5 | 20 | /20 | |
+| Authority and standards | /5 | 20 | /20 | |
+| Community leverage | /5 | 15 | /15 | |
+| Knowledge diffusion | /5 | 10 | /10 | |
+| Durable reach | /5 | 5 | /5 | |
+| **I** | | **100** | **/100** | |
+
+For each material project, record the observed project influence, the subject's attribution interval, depth of contribution, recency, and durability. State explicitly when only attention metrics are available.
+
+## Development trajectory (T)
+
+| Subdimension | Anchor | Weight | Result | Time-window evidence |
+|---|---:|---:|---:|---|
+| Difficulty progression | /5 | 30 | /30 | |
+| Independent external validation | /5 | 25 | /25 | |
+| Learning and follow-through | /5 | 25 | /25 | |
+| Scope expansion | /5 | 20 | /20 | |
+| **T** | | **100** | **/100** | |
+
+Compare appropriate 6-, 12-, and 24-month slices. Distinguish submitted, reviewed, approved, merged, released, and adopted work.
+
+## Technology scarcity (R), if requested
+
+- Cohort, region, and snapshot date:
+- Evidence for supply and barriers:
+- Adjacent-skill substitution assumptions:
+- Scarcity result and confidence:
+- Separate current market-demand evidence, if the user authorized it:
+
+Never add R to E or describe rarity alone as engineering superiority.
+
+## Optional profile score
+
+Include only if a selection question requires a composite.
+
+- Profile: `[name]`
+- Formula and weights: `[for example, 0.40E + 0.30S + 0.25I + 0.05T]`
+- Profile score: `/100`
+- Missing-axis treatment: `[none / no score / explicit provisional recalculation]`
+- Sensitivity: `[whether the result or rank changes under another relevant profile]`
+
+Call this a **profile score**, not an engineering score. Never compare scores produced with different profiles.
+
+## Representative evidence ledger
+
+### `[repository or artifact]`
+
+- URL: `[URL]`
+
+- Classification: `personal-original / organization-owned / external contribution / fork / educational / other`
+- Observed role: `implementation / decision / verification / accountability / review / release / governance`
+- Attribution interval and rationale:
+- Automation or AI involvement: `observed / reported / unknown`; effect on attribution:
+- Scope and constraints:
+- Validation and outcome:
+- Impact type: `attention / adoption / authority / technical leverage / community leverage / knowledge diffusion`
 - Evidence:
-  - `[commit / PR / issue / release / file URL]` — `what it demonstrates`
-- Engineering observations:
-  - Architecture:
-  - Correctness and testing:
-  - Delivery and maintenance:
-- Limitations or ambiguity:
+  - `[commit / PR / issue / release / code / downstream-use URL]` — `observation and supported claim`
+- Contradictory evidence or limitations:
 
-Repeat for 3–5 projects in standard mode.
+Repeat for 3–5 projects in standard mode and enough artifacts to stabilize the result in deep mode.
 
-## Organization contributions
+## Organization and external contributions
 
-For each relevant organization:
+For each relevant organization or upstream project:
 
-### `[organization](URL)`
+### `[organization or repository]`
 
-- Organization context: `active project, company, community, classroom, personal group, or uncertain`
-- Verified contribution: `repositories, PRs, reviews, issues, releases`
-- Impact radius: `documentation / isolated feature / core module / cross-module / architecture / maintenance`
-- Interpretation: `what this supports and what it does not prove`
+- URL: `[URL]`
 
-Explicitly state when membership is visible but substantive contribution is not.
+- Context: `company / community / classroom / personal group / uncertain`
+- Verified artifacts: `PRs, reviews, issues, commits, releases, governance records`
+- Contribution depth: `cosmetic / scoped / major / subsystem / owner or releaser`
+- Outcome: `submitted / reviewed / merged / released / adopted`
+- What this supports:
+- What it does not prove:
 
-## Collaboration and review evidence
+Membership, commit presence, or association with a famous repository is not substantive attribution by itself.
 
-- Strong review examples:
-- Issue triage or user support:
-- Design discussion quality:
-- Response to feedback:
-- Evidence gaps:
+## Relative placement, if requested
+
+- Defined cohort:
+- Dimension-level percentiles or tiers:
+- Sample and normalization method:
+- Stability under time window, profile, and highest-impact-project removal:
+- Calibration packets used:
+
+If ordering is unstable, report tiers or intervals rather than a precise rank.
 
 ## Strongest demonstrated capabilities
 
-1. `Capability` — `evidence and interpretation`
-2. `Capability` — `evidence and interpretation`
-3. `Capability` — `evidence and interpretation`
+1. `Capability` — `direct evidence and interpretation`
+2. `Capability` — `direct evidence and interpretation`
+3. `Capability` — `direct evidence and interpretation`
 
-## Risks, gaps, and unknowns
+## Risks, contradictions, and unknowns
 
-- `Unknown due to private work or inaccessible repositories`
-- `Weak or contradictory evidence`
-- `Role-relevant area not demonstrated publicly`
-- `Potential concern that should be verified, without overstating it`
+- `Missing due to private work, inaccessible repositories, or evidence outside the window`
+- `Inspectably negative or contradictory evidence`
+- `Attribution or identity ambiguity`
+- `Role-relevant area not publicly demonstrated`
+- `Claim most sensitive to sampling or scoring choices`
+
+Keep missing evidence separate from negative evidence.
 
 ## Suggested interview or verification questions
 
-Questions must be tied to observed work. Examples:
+Tie every question to an observed artifact:
 
-1. “In PR X, why did you choose approach A over B, and what failure mode were you protecting against?”
-2. “Repository Y changed architecture between versions. What forced the redesign?”
-3. “How would you test the concurrency or compatibility boundary visible in module Z?”
-4. “What production constraints are missing from this public implementation?”
+1. “In PR X, which decisions were yours, what alternatives did you reject, and how did you verify the result?”
+2. “Repository Y changed architecture between releases. What constraint forced the redesign?”
+3. “How would you reproduce and test the concurrency, compatibility, or physical boundary visible in module Z?”
+4. “Which production or user constraints are absent from this public implementation?”
+5. “Where did automation assist, and which specification, review, and accountability steps remained yours?”
 
 ## Limitations
 
-This report evaluates publicly visible GitHub evidence only. It may omit private repositories, company work, pair programming, unlinked accounts, offline engineering, and contributions whose authorship is obscured by repository history. It should inform, not replace, technical interviews and reference checks.
+This report evaluates the stated public evidence boundary. It may omit private repositories, company work, pair programming, unlinked accounts, offline engineering, and contributions obscured by repository history or automation. Popularity, technology rarity, and organizational association are not substitutes for inspectable engineering evidence. The report should inform, not replace, technical interviews, work samples, and reference checks.

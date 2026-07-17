@@ -1,108 +1,246 @@
-# Detailed Scoring Rubric
+# Multi-Axis Assessment Rubric
 
-Score each dimension from 0 to 5. Use half points only when the evidence genuinely falls between anchors. Always attach evidence to the score.
+Use this rubric to score separate constructs. Do not collapse missing axes into
+zero and do not call a composite score “engineering capability.”
 
-## 1. Project ownership and delivery — 20%
+## Contents
 
-| Score | Evidence anchor |
+1. Engineering capability (E)
+2. Stewardship and ownership (S)
+3. Ecosystem impact (I)
+4. Development trajectory (T)
+5. Technology scarcity (R)
+6. Confidence (C)
+7. Interpretation rules
+
+## Shared 0–5 anchors
+
+Apply these anchors to each subdimension, then use the dimension-specific notes
+below.
+
+| Score | General anchor |
 |---:|---|
-| 0 | No inspectable project evidence. |
-| 1 | Tutorials, isolated exercises, forks, or unfinished demos dominate. |
-| 2 | Completes small projects or scoped features but ownership and delivery are limited. |
-| 3 | Independently designs, implements, tests, documents, and ships meaningful projects or subsystems. |
-| 4 | Sustains important systems over time, manages compatibility and releases, and coordinates changes across contributors or modules. |
-| 5 | Demonstrates durable technical stewardship across major systems, releases, migration paths, and contributor workflows. |
+| 0 | Relevant inspectable evidence shows no credited behavior, or the work is wholly attributable elsewhere. Mere absence is unknown, not 0. |
+| 1 | Exploratory, copied, fragile, or narrowly supervised evidence. |
+| 2 | Completes ordinary scoped work; important boundaries remain weak. |
+| 3 | Independently handles meaningful work with appropriate quality. |
+| 4 | Handles difficult constraints, cross-module effects, and sustained responsibility. |
+| 5 | Repeatedly shapes major systems, practices, or ecosystems with durable judgment. |
 
-## 2. Code quality and architecture — 20%
+Use half points only when evidence genuinely falls between anchors. Attach at
+least one concrete evidence item to every scored subdimension.
 
-| Score | Evidence anchor |
-|---:|---|
-| 0 | No code available for inspection. |
-| 1 | Code is mostly copied, monolithic, fragile, or difficult to reason about. |
-| 2 | Functional code with inconsistent boundaries, abstraction, naming, or error handling. |
-| 3 | Clear modules, appropriate abstractions, readable code, and sensible project-scale architecture. |
-| 4 | Strong interface design, cross-module reasoning, compatibility awareness, and disciplined refactoring. |
-| 5 | Repeatedly demonstrates architecture judgment under complex constraints and improves system structure without unnecessary complexity. |
+## 1. Engineering capability (E) — 0–100
 
-## 3. Problem solving and debugging — 15%
+E is criterion-referenced. The same evidence receives the same score regardless
+of the comparison set, popularity, employer, followers, or technology scarcity.
 
-| Score | Evidence anchor |
-|---:|---|
-| 0 | No visible problem-solving evidence. |
-| 1 | Mostly superficial patches or unexplained changes. |
-| 2 | Resolves straightforward issues but root-cause reasoning is limited or undocumented. |
-| 3 | Reproduces problems, narrows causes, explains trade-offs, and adds targeted fixes. |
-| 4 | Handles ambiguous, cross-layer, performance, concurrency, or compatibility problems with strong reasoning. |
-| 5 | Repeatedly leads diagnosis of complex failures and improves the project's debugging or prevention mechanisms. |
+| Subdimension | Weight | What to evaluate |
+|---|---:|---|
+| Implementation quality | 20 | Readability, data structures, error handling, resource management, appropriate abstraction, change discipline. |
+| Architecture and interfaces | 25 | Module boundaries, API/contracts, cross-module reasoning, extensibility, compatibility, migration design. |
+| Problem solving and debugging | 20 | Reproduction, root cause, trade-offs, performance analysis, cross-layer diagnosis, prevention. |
+| Correctness and reliability | 20 | Tests, edge cases, concurrency, failure handling, CI, release safety, physical validation where applicable. |
+| Constraint depth | 15 | Demonstrated handling of difficult correctness, performance, platform, physical, operational, or domain constraints. |
 
-## 4. Testing, correctness, and reliability — 15%
+Calculate:
 
-| Score | Evidence anchor |
-|---:|---|
-| 0 | No test or correctness evidence. |
-| 1 | Little validation; happy-path behavior dominates. |
-| 2 | Basic tests exist, but important boundaries, failures, or regressions are weakly covered. |
-| 3 | Tests core behavior, edge cases, and regressions; CI is appropriate to project scale. |
-| 4 | Demonstrates reliability thinking across failure modes, compatibility, concurrency, performance, or operational behavior. |
-| 5 | Shapes project-wide correctness strategy, test architecture, release safety, or incident prevention. |
+`E = sum(subdimension_score / 5 * weight)`
 
-## 5. Collaboration and code review — 10%
+### Engineering anchors
 
-| Score | Evidence anchor |
-|---:|---|
-| 0 | No visible collaboration evidence. |
-| 1 | Minimal interaction or mostly transactional comments. |
-| 2 | Responds to feedback and participates in basic issue or PR discussion. |
-| 3 | Communicates clearly, reviews meaningful changes, and distinguishes correctness from style. |
-| 4 | Provides strong design, reliability, compatibility, or maintainability reviews and helps other contributors succeed. |
-| 5 | Demonstrates sustained technical leadership through reviews, mentoring, conflict resolution, and governance. |
+#### Implementation quality
 
-## 6. Maintenance and release discipline — 10%
+- 1: Mostly copied, monolithic, or happy-path code.
+- 3: Clear and proportionate implementation with sensible failure handling.
+- 5: Repeatedly improves complex core code while preserving behavior and
+  reviewability.
 
-| Score | Evidence anchor |
-|---:|---|
-| 0 | No maintenance evidence. |
-| 1 | One-time uploads or abandoned demos. |
-| 2 | Occasional fixes and updates without clear release or compatibility discipline. |
-| 3 | Sustained fixes, dependency maintenance, releases, documentation, and issue response. |
-| 4 | Handles migrations, deprecations, release automation, recovery, and long-term technical debt. |
-| 5 | Leads durable maintenance and release practices across a significant project or ecosystem. |
+#### Architecture and interfaces
 
-## 7. Role relevance and technical depth — 10%
+- 1: Boundaries are unclear or accidental.
+- 3: Modules and interfaces fit the project scale.
+- 5: Repeated architecture judgment under compatibility and ecosystem
+  constraints.
 
-| Score | Evidence anchor |
-|---:|---|
-| 0 | No relevant evidence for the target role. |
-| 1 | Surface-level use of relevant tools or frameworks. |
-| 2 | Implements ordinary role-related tasks with limited depth. |
-| 3 | Shows solid understanding of the role's core technical concerns. |
-| 4 | Demonstrates depth in difficult role-specific problems and trade-offs. |
-| 5 | Demonstrates recognized expertise, novel technical judgment, or substantial ecosystem influence in the target area. |
+#### Problem solving and debugging
 
-## Score interpretation
+- 1: Symptom patches without traceable reasoning.
+- 3: Reproduces, narrows, fixes, and validates meaningful problems.
+- 5: Leads diagnosis of ambiguous, cross-layer, performance, concurrency, or
+  lifecycle failures and improves prevention.
 
-| Total | Interpretation |
-|---:|---|
-| 0–24 | Public evidence is too limited or mostly exploratory. |
-| 25–44 | Evidence of scoped contribution, with limited ownership or depth. |
-| 45–64 | Evidence consistent with an independent builder or solid contributor. |
-| 65–79 | Strong evidence of system ownership and mature engineering judgment. |
-| 80–100 | Exceptional public evidence of technical stewardship or maintainership. |
+#### Correctness and reliability
 
-These ranges are not employment-level guarantees. A 70 with low confidence is weaker evidence than a 60 with high confidence.
+- 1: Little validation beyond manual happy paths.
+- 3: Core behavior and regressions are tested appropriately for project type.
+- 5: Shapes project-wide correctness, compatibility, release safety, physical
+  validation, or incident prevention.
 
-## Confidence modifiers
+#### Constraint depth
 
-Increase confidence when:
+- 1: Surface use of frameworks without difficult constraints.
+- 3: Solid role-relevant depth in at least one non-trivial constraint class.
+- 5: Repeatedly handles multiple tightly coupled constraints, such as ABI plus
+  performance, concurrency plus recovery, or firmware plus measured hardware.
 
-- Contribution scope is verified through multiple sources.
-- Core code and tests are directly inspected.
-- Activity spans meaningful time and multiple evidence types.
-- External maintainers review and merge substantial work.
+Rarity alone never raises this score.
 
-Decrease confidence when:
+## 2. Stewardship and ownership (S) — 0–100
 
-- Most work is private or inaccessible.
-- Ownership is obscured by imports, mirrors, squashes, or account ambiguity.
-- Evidence is concentrated in a single recent project.
-- Only profile metrics or README-level information is available.
+S measures responsibility for systems and contributors, not raw activity.
+
+| Subdimension | Weight | What to evaluate |
+|---|---:|---|
+| Ownership and delivery | 30 | End-to-end delivery, subsystem responsibility, follow-through, operational accountability. |
+| Maintenance and release | 25 | Releases, migrations, compatibility, deprecation, dependency work, recovery, technical debt. |
+| Collaboration and review | 25 | Review quality, design discussion, feedback response, issue support, helping contributors succeed. |
+| Governance and contributor leverage | 20 | Merge/release responsibility, standards, roadmap stewardship, mentoring, contributor pathways, bus-factor reduction. |
+
+Calculate:
+
+`S = sum(subdimension_score / 5 * weight)`
+
+### Stewardship anchors
+
+- 0–1: Relevant sampled evidence shows no sustained responsibility, or only
+  one-time uploads without follow-through. If responsibility evidence is merely
+  unavailable, report it as unknown instead.
+- 2: Owns small projects or completes scoped collaborative work.
+- 3: Sustains a meaningful project or subsystem and participates constructively
+  in collaboration and releases.
+- 4: Coordinates changes across modules or contributors and manages
+  compatibility, releases, or operational consequences.
+- 5: Demonstrates durable technical stewardship, high-quality reviews,
+  governance, contributor development, and ecosystem responsibility.
+
+AI or bot implementation does not remove S credit when specification, decision,
+verification, and accountability are directly evidenced. It does reduce
+implementation attribution where appropriate.
+
+## 3. Ecosystem impact (I) — 0–100
+
+Use `impact-and-scarcity.md` before scoring I.
+
+| Subdimension | Weight | What to evaluate |
+|---|---:|---|
+| Adoption | 30 | Sustained downstream use, reverse dependencies, installations, integrations, organizational diversity. |
+| Downstream technical leverage | 20 | How much other engineering work the project, API, tool, or standard enables. |
+| Authority and standards | 20 | Maintainer/releaser authority, accepted RFCs/PEPs, official adoption, ecosystem interfaces. |
+| Community leverage | 15 | Contributor growth, reviews, responsiveness, contributor conversion, reduced bus factor. |
+| Knowledge diffusion | 10 | Durable technical education, referenced documentation, examples, courses, or practices. |
+| Durable reach | 5 | Multi-year relevance, retained users, supported versions, continued downstream dependence. |
+
+Calculate I only after project-level influence is multiplied by verified
+individual attribution. Attention-only evidence may contribute at most 5 points
+to I unless corroborated by adoption, authority, or downstream use.
+
+## 4. Development trajectory (T) — 0–100
+
+T describes direction and momentum, not realized impact or employment level.
+
+| Subdimension | Weight | What to evaluate |
+|---|---:|---|
+| Difficulty progression | 30 | Whether recent work moves toward harder constraints and more central code paths. |
+| Independent external validation | 25 | Review quality, acceptance, maintainer trust, promotion, or repeated upstream success. |
+| Learning and follow-through | 25 | Response to feedback, iteration quality, regression follow-up, closure after setbacks. |
+| Scope expansion | 20 | Growth from tasks to subsystems, implementation to design, or individual work to contributor responsibility. |
+
+Compare 6-, 12-, and 24-month windows. Do not equate a burst of generated
+repositories or raw commits with trajectory.
+
+### Open-change evidence weights
+
+Use these as navigation defaults, then inspect discussion quality:
+
+| State | Maximum realized-work credit |
+|---|---:|
+| Submitted, no review | 0.15 |
+| CI passes or substantive discussion | 0.35 |
+| Positive maintainer feedback with requested changes | 0.55 |
+| Approved, awaiting merge | 0.80 |
+| Merged | 1.00 |
+| Released or demonstrably adopted | Add impact evidence separately |
+
+Unmerged work may raise T and provide partial E evidence. It does not create
+realized I merely because the target repository is famous.
+
+## 5. Technology scarcity (R) — optional, 0–100
+
+R is cohort-relative and time-sensitive. It is not an engineering score.
+
+| Subdimension | Weight | What to evaluate |
+|---|---:|---|
+| Supply scarcity | 25 | Estimated availability of developers with comparable verified depth. |
+| Learning and infrastructure barriers | 25 | Toolchains, hardware, data, environments, and time required to become effective. |
+| Cross-domain coupling | 20 | Need to combine multiple technical domains correctly. |
+| Failure and feedback cost | 20 | Cost, latency, safety, or difficulty of reproducing and validating failures. |
+| Substitution difficulty | 10 | How readily adjacent skills can replace the demonstrated specialty. |
+
+Requirements:
+
+- Define the cohort, date, region if relevant, and evidence source.
+- Normalize within role and ecosystem.
+- Report R as unknown when the cohort cannot be credibly estimated.
+- Never infer market demand from GitHub rarity.
+- Never add R to E.
+
+## 6. Confidence (C)
+
+Report four confidence components:
+
+| Component | Question |
+|---|---|
+| Evidence coverage | Were code, tests, history, reviews, releases, and impact surfaces sampled? |
+| Attribution | Is the person's role distinguishable from upstream, teammates, bots, and agents? |
+| Sampling stability | Would a different reasonable project or PR sample likely change the result? |
+| Identity certainty | Is the account linkage clear? |
+
+Assign an overall confidence:
+
+- **High**: Multiple independent evidence types, direct code inspection,
+  verified contribution, stable sampling, little identity ambiguity.
+- **Medium**: Direct evidence exists but important axes, authorship, or project
+  history remain incomplete.
+- **Low**: Mostly profile-level signals, sparse artifacts, unclear attribution,
+  or inaccessible work.
+
+For low confidence, prefer bands and qualitative ranges over precise totals.
+
+## 7. Interpretation rules
+
+### Criterion-referenced versus relative output
+
+- E and S are criterion-referenced.
+- I is evidence-based but ecosystem-normalized.
+- T is time-window-relative to the person's earlier evidence.
+- R and cohort percentile are explicitly relative.
+- A comparison set must not alter E or S.
+
+### Missing versus negative evidence
+
+- Missing evidence: unknown, inaccessible, or outside GitHub. Do not score as a
+  demonstrated strength or weakness.
+- Negative evidence: an inspectable failure, regression pattern, abandoned
+  compatibility promise, poor review behavior, or missing validation that the
+  project context reasonably required.
+
+### Domain fairness
+
+Evaluate validation proportionally:
+
+- Libraries may require compatibility matrices and type/API tests.
+- Applications may emphasize integration, migration, and operational paths.
+- Hardware may rely on measurements, test fixtures, schematics, revisions, and
+  hardware-in-the-loop evidence rather than conventional unit tests alone.
+- Kernels and compilers may rely on regression suites, architecture matrices,
+  benchmarks, and formal interface constraints.
+- Educational projects may demonstrate knowledge diffusion and developer
+  experience but need separate code or governance evidence for high E/S scores.
+
+### No automatic market-value score
+
+Market value depends on capability, role fit, scarcity, demand, location,
+industry, and business impact. GitHub alone does not establish these inputs.
+Only estimate it when the user supplies or authorizes current external market
+data, and label the result separately from E/S/I/T/R.
