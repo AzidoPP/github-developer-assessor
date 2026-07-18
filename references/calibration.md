@@ -23,13 +23,21 @@ Bands describe demonstrated engineering scope. They are not job titles, compensa
 
 | Band | Quantitative gate | Required qualitative evidence |
 |---|---:|---|
-| Exploratory | insufficient evidence for Contributor | Learning or small artifacts are visible, but independent delivery is not yet established. |
+| Insufficient public evidence | E is unknown or its interval crosses the Contributor gate | Public evidence cannot support a reliable demonstrated-scope band. This is not a negative capability judgment. |
+| Exploratory | E point estimate < 40, or E interval upper bound < 40 | Inspected evidence directly shows learning or exploratory artifacts, while independent validated delivery is not yet established. |
 | Contributor | E >= 40 | At least one attributable, validated, scoped contribution. |
 | Independent builder | E >= 55 and S >= 35 | Repeated end-to-end delivery or clear ownership of a non-trivial component. |
 | System owner | E >= 65 and S >= 55 | Sustained ownership across design, delivery, reliability, and change over time. |
 | Maintainer / technical leader | E >= 75 and S >= 75 | Verified cross-contributor review, release, governance, or technical-direction responsibility. |
 
-The gates are necessary, not sufficient. Evidence must also match the qualitative requirement. A high E score with limited stewardship should be reported as a **high-depth contributor** or **technical specialist**, not forced into a lower engineering interpretation or promoted to maintainer.
+The gates are necessary, not sufficient. Apply a gate to an interval only when
+its lower bound satisfies the threshold. If a credible interval crosses a gate,
+report the adjacent possible bands and the evidence needed to resolve them.
+`Exploratory` requires direct inspectable evidence of exploratory behavior;
+mere evidence scarcity uses `Insufficient public evidence` instead. A high E
+score with limited stewardship should be reported as a **high-depth
+contributor** or **technical specialist**, not forced into a lower engineering
+interpretation or promoted to maintainer.
 
 Impact never substitutes for an E or S gate. A popular project can increase I; it cannot by itself establish implementation depth, architecture judgment, or maintainership.
 
@@ -122,6 +130,8 @@ If rank order changes materially, report a tier or interval instead of a precise
 Track calibration quality over time:
 
 - inter-rater agreement by dimension;
+- exact-anchor agreement, agreement within 0.5, and mean absolute anchor
+  difference using independently scored evidence packets;
 - score drift between rubric versions;
 - prediction error against later observable outcomes;
 - subgroup coverage and domain imbalance;
@@ -129,3 +139,8 @@ Track calibration quality over time:
 - reversals caused by newly discovered evidence.
 
 Calibration data should improve consistency, not turn historical judgments into unquestioned ground truth.
+
+Treat a mean absolute difference above 0.5 on a subdimension, or repeated
+differences of 1 or more on the same evidence, as a prompt to revise its
+behavioral anchors or evidence-selection guidance. Do not add more scale points
+to disguise disagreement.

@@ -88,6 +88,12 @@ Read the references that apply before scoring:
 15. Report confidence separately. Do not publish a precise composite when
     identity, attribution, or more than two required axes are inadequately
     evidenced.
+16. Treat `unknown` as a status outside the 0–5 anchor scale. Use 0 only when
+    applicable inspected evidence supports a zero-credit or materially negative
+    judgment.
+17. Use only whole or half anchors and obey the evidence-breadth and axis
+    completeness rules in `references/rubric.md`. Do not silently renormalize
+    unknown subdimensions.
 
 ## Assessment modes
 
@@ -253,7 +259,12 @@ Use `references/rubric.md`:
 - R — optional cohort-relative scarcity, 0–100 or unknown.
 - C — confidence by evidence coverage, attribution, sampling, and identity.
 
-Do not average unknown values into zero.
+For every scored subdimension, record the anchor, evidence items, attribution
+status, evidence breadth, time span, contradictions, and confidence. Apply the
+single-artifact cap and repeated-evidence requirement before assigning 4 or 5.
+Do not average unknown values into zero. When an axis is incomplete, follow the
+known-weight rules to report `unknown` or an interval instead of silently
+renormalizing it.
 
 ### 11. Calibrate and optionally compose
 
@@ -297,3 +308,7 @@ Before returning an assessment, verify:
 - Representative anchors were applied only after independent scoring.
 - Every major claim has evidence or is marked unknown.
 - Confidence reflects evidence quality rather than developer quality.
+- Zero was used only for inspected negative or wholly unattributable evidence;
+  missing evidence remained unknown.
+- Every 4 or 5 anchor satisfies the evidence-breadth requirement or documents a
+  justified exception.

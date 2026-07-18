@@ -39,6 +39,10 @@ Every change must preserve these boundaries:
 6. Organization membership, commit counts, followers, stars, employer prestige, and association with a famous person do not establish technical depth.
 7. Automation changes attribution; it does not erase human specification, decisions, verification, or accountability when those are evidenced.
 8. Every scored claim must trace to a public artifact or be marked as an inference with confidence.
+9. `unknown` is outside the 0–5 scale; 0 requires applicable inspected evidence
+   and cannot represent missing public work.
+10. Anchors use whole or half points only. Scores of 4 and 5 require the evidence
+    breadth defined in `references/rubric.md` or a documented exception.
 
 ## Calibration contributions
 
@@ -78,8 +82,15 @@ Before proposing a change:
 - confirm that the YAML frontmatter in `SKILL.md` contains only `name` and `description`;
 - check that every referenced file and relative Markdown link exists;
 - verify that dimension weights total 100 and profile weights total 100%;
+- verify that behavioral-anchor tables cover 1 through 5 and do not treat
+  `unknown` as a numeric anchor;
+- verify that incomplete axes use `unknown` or an interval without silent
+  renormalization;
 - search for contradictions between the workflow, rubric, calibration rules, evidence schema, and report template;
 - run a sensitivity check on at least one public evidence packet when score behavior changes;
+- have two independent reviewers score at least one representative packet when
+  behavioral anchors change, then record exact agreement, agreement within 0.5,
+  and mean absolute difference by affected subdimension;
 - avoid publishing unnecessary personal data in test artifacts.
 
 If the Codex skill-creator utilities are available, run:

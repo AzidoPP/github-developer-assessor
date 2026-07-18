@@ -66,11 +66,87 @@ Each evidence item should follow this conceptual JSON shape. Implementations may
   "profile": "maintainer",
   "cohort": null,
   "axes": {
-    "E": {"score": 74, "confidence": 0.78, "dimensions": {}},
-    "S": {"score": 68, "confidence": 0.72, "dimensions": {}},
-    "I": {"score": 55, "confidence": 0.65, "dimensions": {}},
-    "T": {"score": 61, "confidence": 0.59, "dimensions": {}},
-    "R": {"score": null, "confidence": null, "dimensions": {}, "status": "not_assessed"}
+    "E": {
+      "status": "scored",
+      "score": 74,
+      "range": null,
+      "known_weight": 100,
+      "confidence": 0.78,
+      "dimensions": {
+        "implementation_quality": {
+          "status": "scored",
+          "anchor": 3.5,
+          "weight": 20,
+          "evidence_ids": ["ev-001"],
+          "evidence_count": 1,
+          "independent_contexts": 1,
+          "time_span_months": 1,
+          "attribution": "strong",
+          "confidence": 0.76,
+          "contradictions": [],
+          "cap_exception": {
+            "applied": true,
+            "rationale": "One PR contains independently inspectable design, implementation, review, and release follow-up."
+          }
+        },
+        "architecture_and_interfaces": {
+          "status": "scored",
+          "anchor": 4,
+          "weight": 25,
+          "evidence_ids": ["ev-002", "ev-003"],
+          "evidence_count": 2,
+          "independent_contexts": 1,
+          "time_span_months": 9,
+          "attribution": "strong",
+          "confidence": 0.79,
+          "contradictions": [],
+          "cap_exception": {"applied": false, "rationale": null}
+        },
+        "problem_solving_and_debugging": {
+          "status": "scored",
+          "anchor": 4,
+          "weight": 20,
+          "evidence_ids": ["ev-004", "ev-005"],
+          "evidence_count": 2,
+          "independent_contexts": 2,
+          "time_span_months": 11,
+          "attribution": "strong",
+          "confidence": 0.81,
+          "contradictions": [],
+          "cap_exception": {"applied": false, "rationale": null}
+        },
+        "correctness_and_reliability": {
+          "status": "scored",
+          "anchor": 3,
+          "weight": 20,
+          "evidence_ids": ["ev-001", "ev-006"],
+          "evidence_count": 2,
+          "independent_contexts": 1,
+          "time_span_months": 8,
+          "attribution": "strong",
+          "confidence": 0.74,
+          "contradictions": ["No inspectable production incident history"],
+          "cap_exception": {"applied": false, "rationale": null}
+        },
+        "constraint_depth": {
+          "status": "scored",
+          "anchor": 4,
+          "weight": 15,
+          "evidence_ids": ["ev-004", "ev-007"],
+          "evidence_count": 2,
+          "independent_contexts": 2,
+          "time_span_months": 14,
+          "attribution": "medium",
+          "confidence": 0.71,
+          "contradictions": [],
+          "cap_exception": {"applied": false, "rationale": null}
+        }
+      }
+    },
+    "S": {"status": "scored", "score": 68, "range": null, "known_weight": 100, "confidence": 0.72, "dimensions": {}},
+    "I": {"status": "scored", "score": 55, "range": null, "known_weight": 100, "confidence": 0.65, "dimensions": {}},
+    "T": {"status": "scored", "score": 61, "range": null, "known_weight": 100, "confidence": 0.59, "dimensions": {}},
+    "R": {"status": "not_assessed", "score": null, "range": null, "known_weight": 0, "confidence": null, "dimensions": {}}
   },
   "profile_score": {
     "score": 66.8,
@@ -86,14 +162,27 @@ Each evidence item should follow this conceptual JSON shape. Implementations may
     "sampling_stability": 0.63,
     "identity": 0.98
   },
-  "evidence_ids": ["ev-001"],
+  "evidence_ids": ["ev-001", "ev-002", "ev-003", "ev-004", "ev-005", "ev-006", "ev-007"],
   "unknowns": ["private incident-response history"],
   "contradictions": [],
   "limitations": ["public GitHub evidence only"]
 }
 ```
 
-Scores should retain full precision internally but normally display as whole numbers. A missing dimension is `null` with a status and explanation; it is never zero.
+E is expanded above to demonstrate the required dimension metadata; S, I, and T
+are abbreviated only to keep the conceptual example readable. Production
+records must expand every scored dimension in the same form.
+
+Axis `status` is `scored`, `interval`, `unknown`, or `not_assessed`. A complete scored axis may
+retain full precision internally but normally displays as a whole number. An
+incomplete axis stores `score` as `null`, `range` as `[low, high]` when at least
+60 weighted points are known, and `known_weight`. Below that threshold it stores
+an `unknown` status and explanation.
+
+A subdimension `status` is `scored` or `unknown`. A missing subdimension uses a
+null anchor with an explanation; it is never zero. Anchors are whole or half
+points only. Record evidence breadth and any exception to the normal
+single-artifact cap so high anchors remain auditable.
 
 ## 3. Labels for assisted assessment
 

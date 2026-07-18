@@ -8,6 +8,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- Complete 1–5 behavioral anchors for every E/S/I/T/R subdimension, with
+  `unknown` explicitly outside the scale.
+- Evidence-breadth rules for half anchors, single-artifact caps, high anchors,
+  incomplete axes, score intervals, and band-gate uncertainty.
+- Auditable subdimension metadata for attribution, evidence breadth, time span,
+  contradictions, confidence, and cap exceptions.
+- Inter-rater checks for exact agreement, agreement within 0.5, and mean
+  absolute anchor difference.
 - Separate engineering capability (E), stewardship (S), ecosystem impact (I), development trajectory (T), technology scarcity (R), and confidence (C) axes.
 - Attributable-impact model that distinguishes attention, adoption, authority, technical leverage, community leverage, and knowledge diffusion.
 - Project attribution ranges, diminishing returns, ecosystem normalization, and anti-double-counting rules.

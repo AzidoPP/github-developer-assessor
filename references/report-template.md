@@ -27,10 +27,27 @@
 | Development trajectory (T) | /100 or unknown | | Direction of growth within the stated window | |
 | Technology scarcity (R) | /100, unknown, or not assessed | | Cohort-relative context; not capability | |
 
-- Capability band: `Exploratory / Contributor / Independent builder / System owner / Maintainer or technical leader`
+- Capability band: `Insufficient public evidence / Exploratory / Contributor / Independent builder / System owner / Maintainer or technical leader`
 - Specialist modifier: `none / high-depth contributor / technical specialist`
 - Overall confidence: `High / Medium / Low ([0–1] if machine-readable output is used)`
 - Confidence basis: `coverage, attribution, sampling stability, and identity certainty`
+
+### Score completeness
+
+For each axis, state `known_weight`. Use a point estimate only when all weighted
+subdimensions are scored. At 60–99 known weight, report an interval without
+renormalizing unknown dimensions. Below 60, report `unknown`. If an interval
+crosses a capability-band gate, report the adjacent possible bands rather than
+choosing one. `Insufficient public evidence` is distinct from directly observed
+exploratory behavior.
+
+For every scored subdimension record:
+
+- whole or half anchor and confidence;
+- evidence IDs or URLs and attribution strength;
+- evidence count, independent contexts, and time span;
+- contradictions;
+- any documented exception to the normal single-artifact cap of 3.
 
 Do not replace this table with a single total.
 

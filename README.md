@@ -53,6 +53,10 @@ Specify a role, expected level, depth, window, profile, or comparison cohort onl
 
 Capability bands use quantitative gates plus qualitative evidence. High technical depth with limited public stewardship is reported as a specialist pattern instead of being mislabeled as either junior or maintainer.
 
+Subdimensions use behaviorally anchored 0–5 judgments. `Unknown` is not a
+number, half anchors require evidence from both adjacent levels, and high
+anchors require repeated evidence rather than a single famous artifact.
+
 ## Files
 
 - `SKILL.md` — complete workflow and non-negotiable assessment rules.
