@@ -25,6 +25,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   anchor, including the `liyupi` developer-education packet and the
   `Sunrisepeak` modern-C++ tooling and community-maintainer packet, plus the
   `sheepbox8646` multi-agent-platform system-owner packet.
+- A first external calibration batch covering `bagder`, `BurntSushi`,
+  `FiloSottile`, `yyx990803`, `mitchellh`, and `simonw`, with frozen public
+  evidence, role-conditioned scarcity cohorts, explicit AI and team attribution,
+  contradictory evidence, and sensitivity intervals.
 - Machine-readable evidence and assessment schemas designed for weak supervision, pairwise labeling, active learning, and axis-specific models.
 - Explicit attribution guidance for AI- or bot-assisted implementation.
 - Domain-fair validation guidance for embedded, hardware, systems, compiler, application, library, and educational work.
@@ -35,6 +39,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Changed
 
 - Replaced the 1.x single weighted total with a multi-axis v2 report. Earlier totals remain readable but are not directly comparable with v2 axes or profile scores.
+- Moderately recalibrated the first external anchor batch against the existing
+  pilot anchors, reserving more 5-level subdimensions for independently
+  validated cross-context ceilings without collapsing established maintainers
+  into the middle of the scale.
 - Made impact a scored, attributable construct instead of treating all popularity signals only as navigation hints.
 - Made technology scarcity optional and cohort-relative, separate from engineering difficulty, demand, compensation, and market value.
 - Expanded the report template to expose dimension evidence, attribution, confidence components, unknowns, profile weights, and comparison stability.

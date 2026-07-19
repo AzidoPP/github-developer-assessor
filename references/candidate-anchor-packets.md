@@ -42,6 +42,20 @@ The compact notation follows the rubric order:
 | `liyupi` | 3 / 3 / 2.5 / 2 / 3 | 54 | 4 / 3 / 2.5 / 3.5 | 66 | 3 / 3 / 3 / 2.5 / 3.5 / 3.5 | 60 | 3.5 / 2.5 / 2.5 / 3.5 | 60 | 4 / 2.5 / 3.5 / 2 / 3 | 61 | Medium |
 | `Sunrisepeak` | 3.5 / 4 / 4 / 3.5 / 4.5 | 78 | 4 / 4 / 4 / 3.5 | 78 | 3 / 3 / 3.5 / 3 / 4 / 3 | 64 | 4 / 3.5 / 4 / 4 | 78 | 3.5 / 3.5 / 4 / 3 / 3 | unknown (69 diagnostic) | Medium |
 | `sheepbox8646` | 3.5 / 4 / 4 / 3 / 4 | 74 | 4 / 4 / 3 / 3.5 | 73 | 3.5 / 3.5 / 3.5 / 4 / 2.5 / 2.5 | 69 | 4 / 3 / 3.5 / 4 | 73 | 3.5 / 3.5 / 4 / 3.5 / 3 | unknown (71 diagnostic) | Medium |
+| `bagder` | 4.5 / 5 / 5 / 4.5 / 5 | 96 | 5 / 5 / 4.5 / 5 | 98 | 4.5 / 5 / 5 / 4.5 / 5 / 5 | 96 | 2.5 / 5 / 4 / 2.5 | 70 | 4.5 / 4 / 5 / 4.5 / 4.5 | 90 | High |
+| `BurntSushi` | 4.5 / 5 / 4.5 / 4.5 / 5 | 94 | 5 / 4.5 / 4 / 3.5 | 87 | 5 / 5 / 4.5 / 3.5 / 4.5 / 5 | 93 | 4 / 4.5 / 5 / 4 | 88 | 4.5 / 4 / 4.5 / 3 / 4.5 | 82 | High |
+| `FiloSottile` | 5 / 5 / 4 / 5 / 5 | 96 | 5 / 5 / 4.5 / 4 | 94 | 4.5 / 5 / 5 / 4.5 / 4 / 5 | 94 | 4.5 / 5 / 5 / 4.5 | 95 | 4.5 / 4.5 / 5 / 5 / 4 | 93 | High |
+| `yyx990803` | 4.5 / 5 / 4.5 / 4.5 / 4.5 | 93 | 5 / 5 / 4 / 4.5 | 93 | 5 / 5 / 5 / 4.5 / 4 / 5 | 97 | 4 / 4 / 4.5 / 4.5 | 85 | 4.5 / 4 / 4.5 / 3 / 4.5 | 82 | High |
+| `mitchellh` | 4.5 / 4.5 / 5 / 4.5 / 5 | 94 | 5 / 4.5 / 4 / 4.5 | 91 | 4.5 / 5 / 5 / 4 / 4 / 5 | 92 | 5 / 4.5 / 4 / 5 | 93 | 4.5 / 4.5 / 5 / 4.5 / 4 | 91 | High |
+| `simonw` | 4 / 4.5 / 4.5 / 4 / 4 | 85 | 5 / 5 / 3.5 / 4 | 89 | 4.5 / 4.5 / 4.5 / 4 / 4.5 / 4.5 | 89 | 4 / 3.5 / 5 / 5 | 87 | 3.5 / 3 / 4 / 3 / 3.5 | unknown (68 diagnostic) | Medium |
+
+The rows from `bagder` through `simonw` are the first external calibration
+batch. They were scored against the rubric before being compared with the
+earlier pilot rows; table order is not a ranking and this is not the separate
+activation review required below. The comparison pass is deliberately moderate:
+it reserves more 5-level subdimensions for cross-context ceilings while keeping
+these established maintainers above the earlier mid-range packets rather than
+normalizing them toward the center.
 
 ## `torvalds`
 
@@ -630,6 +644,452 @@ and its npm SDK surface lags the main application. Private production scale,
 unique installations, undisclosed AI assistance, the subject's formal
 organization role, and incident history outside public issues remain unknown.
 These gaps may move confidence or sensitivity but are not scored as failures.
+
+## `bagder`
+
+- Role lens: portable network-protocol library maintainer, security and release
+  lead.
+- Capability interpretation: Maintainer / technical leader.
+- R cohort: top-level maintainers who combine public API compatibility,
+  multi-protocol state machines, TLS and resolver integration, portability, and
+  release/security responsibility for general-purpose network client libraries.
+  The 2026-07-18 discovery frame uses the public maintainer and release records
+  for [curl](https://github.com/curl/curl/blob/master/docs/GOVERNANCE.md),
+  [OpenSSL](https://openssl-library.org/community/omc/),
+  [nghttp2](https://github.com/nghttp2/nghttp2),
+  [libssh2](https://github.com/libssh2/libssh2), and
+  [GNU Wget](https://git.savannah.gnu.org/cgit/wget.git/tree/AUTHORS). It is not
+  a labor-market sample.
+
+### Engineering and attribution
+
+- [`curl/curl#15289`](https://github.com/curl/curl/pull/15289) repairs
+  undefined-behavior sanitizer findings by aligning callback types across 42
+  files and preserving tests and public behavior.
+  [`curl/curl#17253`](https://github.com/curl/curl/pull/17253) moves the shared
+  `curlx_` surface through 463 files while reasoning about legacy MSVC builds,
+  linkage, symbol collisions, and merge sequencing. The latter was discussed at
+  curl-up and received independent manual VS2010 validation.
+- [`curl/curl#17134`](https://github.com/curl/curl/pull/17134) introduces a
+  resolver wrapper with c-ares-aware debugging and test support, while
+  [`curl/curl#16358`](https://github.com/curl/curl/pull/16358) changes IPv6
+  `CURLOPT_RESOLVE` replacement semantics with documentation, tests, and
+  multi-person design discussion. These are distinct interface, diagnostic,
+  and compatibility traces rather than one large refactor counted repeatedly.
+- Reviews of [`curl/curl#22302`](https://github.com/curl/curl/pull/22302) and
+  [`curl/curl#22247`](https://github.com/curl/curl/pull/22247) show current
+  judgment over negative-DNS-cache poisoning, threaded/c-ares/DoH resolver
+  differences, and MIME filename header injection. Both were still open at the
+  snapshot, so they support review quality and T only, not realized I.
+
+Those artifacts produce E=96 from `4.5 / 5 / 5 / 4.5 / 5`. The implementation
+and reliability half-points retain the counterevidence: the 463-file change was
+self-merged without a formal approval after several CI failures, and a later
+comment on #15289 reported a `CURL_STRICTER` C++ break. The packet does not infer
+that every curl regression, protocol implementation, or test is personally
+attributable to the subject.
+
+### Stewardship, impact, and trajectory
+
+- Curl's [governance](https://github.com/curl/curl/blob/master/docs/GOVERNANCE.md)
+  names Daniel Stenberg as the driving force and current final decision point,
+  while also defining maintainers, a core team, a security team, server
+  administration, and a succession path. The
+  [release procedure](https://github.com/curl/curl/blob/master/docs/RELEASE-PROCEDURE.md)
+  defines an eight-week cadence, feature windows, freezes, signing, and release
+  checks. The subject published the inspected 8.12.0 through 8.21.0 GitHub
+  releases. This yields S=98 from `5 / 5 / 4.5 / 5`.
+- The incomplete [commercial-use list](https://curl.se/docs/companies.html),
+  independent operating-system distribution, and decades of retained API
+  dependence establish ecosystem-shaping adoption. The
+  [contributor history](https://github.com/curl/curl/graphs/contributors) also
+  shows a real multi-contributor project, so adoption and community are held at
+  4.5 rather than transferring curl's full outcome to one person. The durable
+  [Everything curl](https://everything.curl.dev/) reference supports knowledge
+  diffusion. I=96 follows `4.5 / 5 / 5 / 4.5 / 5 / 5`.
+- T=70 from `2.5 / 5 / 4 / 2.5` is intentionally far below the other axes.
+  The recent window demonstrates continuing apex-level responsibility and
+  external reliance, but limited difficulty or scope expansion relative to the
+  subject's own multi-decade baseline. High current activity is not treated as
+  growth by itself.
+
+R=90 follows `4.5 / 4 / 5 / 4.5 / 4.5` within the named network-library
+cohort. The result is driven by the unusual coupling of protocol semantics,
+portable C, ABI compatibility, TLS/resolvers, security response, and a broad
+release matrix; it says nothing about compensation or demand. Reasonable
+sensitivity intervals are E 93–97, S 94–99, I 92–98, T 62–76, and R 84–92.
+Confidence is high for the public boundary, but private incident work and
+security reports are unknown.
+
+## `BurntSushi`
+
+- Role lens: Rust text-search, automata, and performance-library maintainer.
+- Capability interpretation: Maintainer / technical leader.
+- R cohort: maintainers with verified ownership across foundational Rust
+  text-scanning crates, automata semantics, command-line search, performance
+  engineering, and cross-platform correctness. The comparison frame uses the
+  [Rust Library Team's public remit](https://std-dev-guide.rust-lang.org/team/summary.html)
+  and public owner, reverse-dependency, release, and contribution records for
+  `regex`, `regex-automata`, `aho-corasick`, `memchr`, `bstr`, `jiff`, and
+  `ripgrep` as of the snapshot. Overlap between those crates is treated as
+  concentration, not seven independent observations.
+
+### Engineering and AI attribution
+
+- [`rust-lang/regex#1364`](https://github.com/rust-lang/regex/pull/1364)
+  supplies a minimal reproduction and a semantics-level repair for reverse
+  suffix/inner optimization under leftmost-first matching, with regression,
+  MSRV, Miri, platform, and `rebar` benchmark validation. The subject explicitly
+  says an LLM wrote the PR, then records that he rejected the original complex
+  solution, simplified it, checked semantics, and accepted measured performance
+  regressions to restore correctness. Implementation authorship is shared;
+  diagnosis, trade-off, and verification ownership remain directly evidenced.
+- [`BurntSushi/ripgrep#3472`](https://github.com/BurntSushi/ripgrep/pull/3472)
+  adds incremental ignore checking and responds to externally raised hidden
+  ancestor, symlink, Windows, and case-insensitive-filesystem cases before an
+  immediate `ignore` crate release.
+  [`BurntSushi/ripgrep#3475`](https://github.com/BurntSushi/ripgrep/pull/3475)
+  fixes a worker-panic deadlock, while its review also identifies a remaining
+  builder-panic hang scenario; the follow-up risk prevents a ceiling reliability
+  anchor.
+- [`BurntSushi/jiff#593`](https://github.com/BurntSushi/jiff/pull/593) repairs a
+  non-empty-buffer soundness bug and passes no-std, Miri, fuzz, feature, and
+  platform matrices. [`astral-sh/ruff#26771`](https://github.com/astral-sh/ruff/pull/26771)
+  is an independent organization trace: the subject's ignore-system change
+  received upstream review and passed Ruff's broader test, ecosystem, and
+  benchmark gates.
+
+E=94 follows `4.5 / 5 / 4.5 / 4.5 / 5`. The half-points preserve the disclosed
+AI implementation share, the intentional benchmark regressions in #1364, and
+the post-merge edge identified around #3475; the score is not based on crate
+download totals.
+
+### Stewardship, impact, and trajectory
+
+- Sustained releases of [`ripgrep`](https://github.com/BurntSushi/ripgrep/releases),
+  `regex`, and the newer `jiff` demonstrate long-lived ownership and
+  compatibility work. External review succeeds in ripgrep and Ruff, but the
+  [contribution histories](https://github.com/BurntSushi/ripgrep/graphs/contributors)
+  remain strongly subject-concentrated and do not show a comparably mature
+  maintainer-succession institution. S=87 therefore uses `5 / 4.5 / 4 / 3.5`.
+- Crates.io shows broad independent reverse dependence for
+  [`regex`](https://crates.io/api/v1/crates/regex),
+  [`memchr`](https://crates.io/api/v1/crates/memchr),
+  [`aho-corasick`](https://crates.io/api/v1/crates/aho-corasick), and
+  [`bstr`](https://crates.io/api/v1/crates/bstr), while `ripgrep` and
+  [`jiff`](https://crates.io/api/v1/crates/jiff) extend the leverage into end-user
+  search and date/time correctness. Registry downloads include CI and repeated
+  installs; reverse dependencies, independent upstream acceptance, and
+  multi-year maintenance carry the impact claim. I=93 follows
+  `5 / 5 / 4.5 / 3.5 / 4.5 / 5`.
+- T=88 from `4 / 4.5 / 5 / 4` reflects movement from an already high regex
+  baseline into Jiff's temporal constraints, external Ruff integration, and an
+  explicit agent-assisted workflow in which generated solutions are benchmarked,
+  simplified, and sometimes rejected. Scope expansion remains below the
+  cross-domain five anchor, and this is not a raw-commit acceleration score.
+
+R=82 from `4.5 / 4 / 4.5 / 3 / 4.5` is confined to the named Rust
+text/search-performance cohort. Reasonable sensitivity intervals are E 89–96,
+S 80–91, I 89–95, T 80–92, and R 75–86. Confidence is high because AI credit is
+disclosed and the selected work has inspectable tests, reviews, and release
+outcomes; undisclosed private performance work remains unknown.
+
+## `FiloSottile`
+
+- Role lens: Go cryptography, security protocols, transparency systems, and
+  maintainable specifications.
+- Capability interpretation: Maintainer / technical leader.
+- R cohort: public maintainers who combine production cryptographic-library
+  implementation, protocol specification, test-vector design, security release
+  responsibility, and certificate/transparency-log operations. The comparison
+  frame uses the [C2SP maintainer model](https://github.com/C2SP/C2SP/), the
+  [Go security process](https://go.dev/doc/security/policy), public Go crypto
+  commit/review records, and public C2SP, CT, and Sigsum maintainer records at
+  the snapshot. It is a technical-supply frame, not a market-value estimate.
+
+### Engineering and attribution
+
+- [`FiloSottile/age#651`](https://github.com/FiloSottile/age/pull/651) adds
+  hybrid post-quantum and tagged recipients across 35 files, while preserving
+  plugin and older-client compatibility and testing Linux, macOS, Windows,
+  FreeBSD, oldstable/current Go, static analysis, and vulnerability scanning.
+  External cryptographic reviewers participated before release.
+- [`FiloSottile/sunlight#56`](https://github.com/FiloSottile/sunlight/pull/56)
+  designs priority eviction and metrics for load shedding in a certificate
+  transparency log. One small commit is Copilot-coauthored; the surrounding
+  architecture, core implementation, tests, and operational rationale remain
+  attributable to the subject. Two `go.mod latest` checks were failing at merge,
+  which is retained as reliability counterevidence.
+- [`C2SP/C2SP#225`](https://github.com/C2SP/C2SP/pull/225) develops a chunked
+  encryption specification and changes commitments and limits in response to
+  independent cryptographic review.
+  [`C2SP/wycheproof#248`](https://github.com/C2SP/wycheproof/pull/248)
+  supplies ML-DSA randomized test vectors and schema changes under external
+  approval. These specification and adversarial-test traces are independent of
+  the age implementation artifact.
+- Recent directly attributable Go work includes P-256 scalar
+  [replacement](https://github.com/golang/go/commit/be35de22f18a3c16e24a20490ec1fc316ea12b04)
+  and [optimization](https://github.com/golang/go/commit/2c659bb4db1ff06c819f8b4cd6decc71e4d5b36e),
+  plus TLS [ML-KEM](https://github.com/golang/go/commit/6b0243ccf6e83afbd79889a7862599cb5992660c)
+  and [ML-DSA](https://github.com/golang/go/commit/c74ba7d265519fab5794e5b69e4e9f6c25b45582)
+  support. Credit is limited to the linked changes, not the whole Go standard
+  library.
+
+E=96 uses `5 / 5 / 4 / 5 / 5`; the debugging anchor distinguishes strong public
+design and validation traces from repeated cross-context incident diagnosis.
+S=94 from `5 / 5 / 4.5 / 4` reflects release and standards authority with
+external review, while retaining the owner concentration in age and Sunlight
+and avoiding a governance ceiling before independent calibration.
+
+### Impact, trajectory, and blind spots
+
+- [`age` releases](https://github.com/FiloSottile/age/releases) ship the linked
+  post-quantum work and an interoperable format used by the independent
+  [`rage`](https://github.com/str4d/rage) implementation,
+  [`SOPS`](https://github.com/getsops/sops), hardware plugins, and major package
+  repositories. C2SP turns those interfaces into versioned, reviewable public
+  specifications. Go crypto changes supply high downstream leverage, but their
+  adoption belongs to the Go team and ecosystem as well as the author. I=94
+  therefore uses `4.5 / 5 / 5 / 4.5 / 4 / 5` rather than ceiling attribution.
+- T=95 from `4.5 / 5 / 5 / 4.5` captures externally reviewed expansion from an
+  already deep Go-crypto baseline into post-quantum standard-library support,
+  interoperable specifications, adversarial vectors, and operational CT
+  infrastructure. Scope is held at 4.5 because these remain related security
+  systems. This is relative growth, not a reward for cryptography being rare.
+- R=93 follows `4.5 / 4.5 / 5 / 5 / 4` within the named cohort. The score
+  would be lower for a broad application-security role and is not portable to
+  that role.
+
+Reasonable sensitivity intervals are E 92–98, S 88–97, I 90–96, T 89–98, and
+R 86–95. Confidence is high for public work. Private vulnerability handling,
+production incident volume, and undisclosed security consultations are unknown
+and are not assumed positive or negative.
+
+## `yyx990803`
+
+- Role lens: frontend framework/compiler architecture and ecosystem technical
+  leadership.
+- Capability interpretation: Maintainer / technical leader.
+- R cohort: creator-maintainers who retain public technical authority across a
+  widely adopted UI framework plus its compiler and build-tool interfaces. The
+  2026-07-18 frame uses the official [Vue core-team roster](https://vuejs.org/about/team),
+  [Vite team record](https://github.com/vitejs/vite/blob/main/docs/team.md), and
+  public core/release records for React, Angular, Svelte, Solid, and their build
+  integrations. This is a role-conditioned project-maintainer sample, not a
+  ranking of frontend developers generally.
+
+### Engineering and project attribution
+
+- [`vuejs/core#12359`](https://github.com/vuejs/core/pull/12359) is an
+  eight-month, 303-file Vapor-mode integration spanning compiler, runtime,
+  interoperability, tests, end-to-end cases, and size reports. Ninety-nine of
+  the 100 listed commits are attributable to the subject. It is strong direct
+  architecture evidence, but still one correlated Vue artifact rather than 303
+  independent observations.
+- [`vuejs/core#11944`](https://github.com/vuejs/core/pull/11944) removes
+  exponential cost and stack-depth failure in deeply chained computed refs.
+  [`vuejs/core#11458`](https://github.com/vuejs/core/pull/11458) adds lazy
+  hydration strategies while reasoning about tree shaking, Suspense,
+  reactivity, teardown, documentation, and externally raised edge cases.
+- Vapor merged without formal human approval and with several incomplete
+  feature/documentation items. An accidental squash required revert and manual
+  re-merge to restore history. The sampled direct changes were commonly
+  self-merged. Those facts keep implementation and reliability at 4.5 and give
+  E=93 from `4.5 / 5 / 4.5 / 4.5 / 4.5`.
+- [`rolldown/rolldown#8446`](https://github.com/rolldown/rolldown/pull/8446)
+  records the subject's approval and process direction for an AI-assisted,
+  spec-driven workflow, not Rolldown implementation authorship. Rolldown's
+  contribution graph and Vite's distributed team prevent transferring their
+  entire code, review, or release output to the subject.
+
+### Stewardship, impact, and trajectory
+
+- Direct Vue ownership plus the public Vue and Vite teams establish durable
+  roadmap, release, and contributor institutions beyond a solo project. The
+  recent direct PR sample nevertheless contains less visible review of others
+  than its governance reach might imply. S=93 follows `5 / 5 / 4 / 4.5`,
+  keeping durable team governance below a person-level ceiling.
+- Exact-window npm telemetry for
+  [`vue`](https://api.npmjs.org/downloads/point/2026-06-18:2026-07-17/vue),
+  [`vite`](https://api.npmjs.org/downloads/point/2026-06-18:2026-07-17/vite),
+  and [`vitepress`](https://api.npmjs.org/downloads/point/2026-06-18:2026-07-17/vitepress)
+  corroborates broad distribution but includes CI, caches, and repeat installs.
+  Independent framework integrations, stable public interfaces, and continued
+  team maintenance carry the impact claim. I=97 uses
+  `5 / 5 / 5 / 4.5 / 4 / 5`, retaining attribution discounts for team-owned
+  outcomes and knowledge diffusion that is difficult to isolate personally.
+- T=85 from `4 / 4 / 4.5 / 4.5` recognizes Vapor and expansion from Vue into
+  build/compiler direction, but does not equate the Rolldown team's execution
+  or current ecosystem size with the subject's personal growth. Relative to the
+  earlier Vue/Vite baseline, this is meaningful expansion rather than a new
+  five-anchor difficulty regime.
+
+R=82 follows `4.5 / 4 / 4.5 / 3 / 4.5` within the named
+framework/compiler-leader cohort. Reasonable sensitivity intervals are E
+88–95, S 87–96, I 94–99, T 77–90, and R 75–87. Confidence is high for Vue and
+team governance; private organizational decisions and uncredited work inside
+Rolldown or Vite remain unknown.
+
+## `mitchellh`
+
+- Role lens: cross-platform terminal/runtime performance creator and subsystem
+  governor, with older infrastructure-tooling work used only as a baseline.
+- Capability interpretation: Maintainer / technical leader.
+- R cohort: public creator-maintainers of cross-platform, GPU-accelerated
+  terminal emulators who own terminal semantics, rendering/runtime boundaries,
+  OS integration, performance, packaging, and contributor governance. The
+  snapshot frame uses maintainer, contributor, and release records for
+  [Ghostty](https://github.com/ghostty-org/ghostty),
+  [WezTerm](https://github.com/wezterm/wezterm),
+  [kitty](https://github.com/kovidgoyal/kitty), and
+  [Alacritty](https://github.com/alacritty/alacritty). It is not a general
+  systems-engineer or employment-market cohort.
+
+### Engineering and AI attribution
+
+- [`ghostty#13264`](https://github.com/ghostty-org/ghostty/pull/13264) builds
+  page-based scrollback compression through a 38-file `PageList` refactor, LZ4,
+  OS memory reclamation, incremental idle work, a C API, benchmarks, and
+  differential tests. The subject explicitly discloses Codex and LLM help,
+  including generated optimization and commit messages, while documenting
+  extensive review and rewrites. Core implementation attribution is therefore
+  shared rather than silently credited 100%.
+- [`ghostty#13209`](https://github.com/ghostty-org/ghostty/pull/13209) diagnoses
+  a POSIX PTY pipeline bottleneck across kernel queues and supplies A/B
+  benchmarks plus independent Linux-user reproduction; the final code is
+  described as hand-written and verified after an agent found the path.
+  [`ghostty#13367`](https://github.com/ghostty-org/ghostty/pull/13367) implements
+  error-safe terminal resize rollback/fallback semantics with broad tests; its
+  disclosure limits AI assistance to judging and test help.
+- [`coder/websocket#565`](https://github.com/coder/websocket/pull/565) removes
+  per-frame allocation closures with benchmarks and upstream maintainer
+  approval. Its disclosure says AI helped find and fix the issue while the
+  subject understood and manually adapted it, providing an external attribution
+  and validation trace independent of Ghostty.
+
+E=94 follows `4.5 / 4.5 / 5 / 4.5 / 5`. The half-points retain shared
+implementation, the absence of human approvals on the largest self-merged
+Ghostty traces, and the fact that differential corpus/fuzz validation was added
+only after the subject identified it as a pre-merge gap.
+
+### Stewardship, impact, and trajectory
+
+- [Ghostty CODEOWNERS](https://github.com/ghostty-org/ghostty/blob/main/CODEOWNERS)
+  identifies the subject as current BDFL while delegating font, GTK, macOS,
+  renderer, shell, and terminal subsystems to maintainer teams. Its
+  [contributor guide](https://github.com/ghostty-org/ghostty/blob/main/CONTRIBUTING.md)
+  defines contribution, AI-vouch, triage, and review processes. Tags from
+  [v1.0.0 through v1.3.1](https://github.com/ghostty-org/ghostty/tags) show a
+  sustained release lifecycle. Concentrated subject commits and frequent
+  self-merge keep collaboration at 4 and S=91 from `5 / 4.5 / 4 / 4.5`.
+- Ghostty is independently packaged across several operating-system
+  repositories documented by its [installation guide](https://ghostty.org/docs/install/binary).
+  Older, directly attributable initial commits for
+  [Vagrant](https://github.com/hashicorp/vagrant/commit/050bfd9c686b06c292a9614662b0ab1bbf652db3),
+  [Packer](https://github.com/hashicorp/packer/commit/9c22026293c937a45b269a938c7775def8544dea),
+  and [Terraform](https://github.com/hashicorp/terraform/commit/649cf336e86da10910f6e50ea3cfaad507a2e336)
+  support creation and durability baselines only. Current HashiCorp adoption,
+  maintenance, and community work are not transferred to a former creator.
+  I=92 uses `4.5 / 5 / 5 / 4 / 4 / 5`.
+- T=93 from `5 / 4.5 / 4 / 5` captures the externally visible shift from
+  Go infrastructure tools into Zig, terminal emulation, native macOS and GTK,
+  rendering, PTYs, and subsystem governance. Explicit agent use shows an
+  inspectable learning and verification process, but mostly self-reviewed work
+  keeps independent validation and learning below their ceiling anchors.
+
+[`ghostty#8442`](https://github.com/ghostty-org/ghostty/pull/8442) adds a
+security confirmation before Finder/open executes scripts, but a user reported
+that the friction caused them to leave and the discussion was later locked.
+This is retained as a real security-versus-product trade-off, not treated as
+unambiguous success. R=91 follows `4.5 / 4.5 / 5 / 4.5 / 4` within the named
+terminal cohort. Reasonable intervals are E 89–96, S 84–94, I 86–95, T 86–97,
+and R 84–94. Confidence is high for public artifacts; private usage, crash
+telemetry, and undisclosed agent work remain unknown.
+
+## `simonw`
+
+- Role lens: SQLite data-publishing and Python LLM-tool/plugin ecosystem creator
+  and maintainer.
+- Capability interpretation: System owner ↔ Maintainer / technical leader
+  boundary. The point estimate reaches the latter, while the low end of
+  implementation attribution does not clear its E gate.
+- R cohort: maintainers who combine SQLite data tooling, a Python plugin
+  ecosystem, multi-provider LLM abstractions, release responsibility, and
+  durable technical documentation. That intersection is too tailored for a
+  reproducible supply sample. R is therefore formally `unknown`; the diagnostic
+  frame uses public maintainers of Python database tools, model-provider
+  abstraction libraries, and plugin-based developer tools, not only projects
+  selected for resemblance to this subject.
+
+### Engineering and AI attribution
+
+- [`simonw/llm#996`](https://github.com/simonw/llm/pull/996) is a directly
+  authored 2025 baseline for tool definitions, tool calls/results, chains,
+  approvals, logging, async failure repair, types, tests, and documentation.
+  [`datasette#2844`](https://github.com/simonw/datasette/pull/2844) independently
+  diagnoses Python's SQLite context-manager semantics and proves atomic rollback
+  and reader invisibility in threaded and zero-thread modes.
+- The largest current changes have explicit agent attribution.
+  [`simonw/llm#1411`](https://github.com/simonw/llm/pull/1411) is a third-attempt
+  structured-message/parts and streaming-event redesign with many
+  Claude-coauthored commits; the subject iterates the public Python API,
+  exercises it against live providers, edits compatibility/docs, and decides
+  the alpha boundary. [`datasette#2824`](https://github.com/simonw/datasette/pull/2824)
+  begins from a public Fable session and contains Claude-authored API consistency
+  changes reviewed inline by the subject. These support architecture, decision,
+  validation, and S more strongly than direct implementation authorship.
+- [`datasette#2689`](https://github.com/simonw/datasette/pull/2689) replaces
+  token CSRF protection with Fetch Metadata/Origin checks, compatibility shims,
+  bearer-token handling, tests, and upgrade guidance; its first commits are
+  Claude-authored and later commits mix coauthorship and direct cleanup.
+  [`sqlite-utils#795`](https://github.com/simonw/sqlite-utils/pull/795) is also
+  Claude-authored from a linked session. No silent 100% implementation transfer
+  is made for either.
+
+E=85 follows `4 / 4.5 / 4.5 / 4 / 4`. The direct tools and transaction traces
+establish independent technical depth; mixed implementation, owner-only review,
+and correlated agent-generated API work keep the current engineering anchors
+below the other five packets.
+
+### Stewardship, impact, trajectory, and blind spots
+
+- The subject publishes repeated [Datasette](https://github.com/simonw/datasette/releases)
+  and [`llm`](https://github.com/simonw/llm/releases) releases, maintains
+  compatibility and upgrade documentation, and owns long-running roadmaps.
+  Review of external work such as
+  [`sqlite-utils#634`](https://github.com/simonw/sqlite-utils/pull/634) catches
+  optimized-mode `assert` behavior, while
+  [`datasette-acl#51`](https://github.com/datasette/datasette-acl/pull/51)
+  simplifies a contributor API. The two-year merged external-review sample is
+  much smaller than the subject's authored/self-reviewed work, so collaboration
+  is 3.5 and S=89 uses `5 / 5 / 3.5 / 4`.
+- The official [Datasette plugin directory](https://datasette.io/plugins)
+  listed 154 plugins at the snapshot, including independent owners and recent
+  releases. At the snapshot, PyPIStats `last_month` telemetry reported about
+  156,000 downloads for
+  [`datasette`](https://pypistats.org/packages/datasette),
+  409,000 for [`llm`](https://pypistats.org/packages/llm), and
+  1.13 million for
+  [`sqlite-utils`](https://pypistats.org/packages/sqlite-utils).
+  Those counts corroborate continuing distribution but include CI and repeat
+  installs.
+  Plugin interfaces, independent extensions, releases, and durable
+  documentation carry I=89 from `4.5 / 4.5 / 4.5 / 4 / 4.5 / 4.5`; the whole
+  plugin ecosystem is not assigned to one author.
+- T=87 from `4 / 3.5 / 5 / 5` reflects expansion from the established SQLite and
+  publishing baseline into multi-provider model APIs, tools, resumable
+  human-in-the-loop chains in [`llm#1482`](https://github.com/simonw/llm/pull/1482),
+  and a transparent agent-driven engineering practice. High learning and scope
+  do not erase lower direct-code attribution; the limited independent human
+  review keeps external validation at 3.5.
+
+The diagnostic R anchors `3.5 / 3 / 4 / 3 / 3.5` mechanically produce 68, but
+R remains `unknown` because the role intersection and qualified-person sample
+are not reproducible enough. Reasonable intervals are E 74–89, S 82–93, I
+83–93, and T 78–91. E's lower bound crosses the Maintainer gate, so the packet
+must disclose System owner as an adjacent band. Overall confidence is medium:
+AI attribution is unusually transparent, but private production use,
+independent incident outcomes, and undisclosed agent assistance remain unknown.
 
 ## Review and activation protocol
 

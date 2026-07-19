@@ -44,9 +44,10 @@ Impact never substitutes for an E or S gate. A popular project can increase I; i
 ## 3. Candidate anchor registry
 
 Named anchors are useful only when backed by frozen, reproducible evidence
-packets. The following names came from the 2026-07-18 pilot. Their packets now
-exist, but they have not completed formal independent activation review and
-remain **candidate anchors**, not active normative anchors:
+packets. The registry combines the 2026-07-18 pilot set and the first external
+calibration batch from the same snapshot. Their packets now exist, but they
+have not completed formal independent activation review and remain
+**candidate anchors**, not active normative anchors:
 
 Named calibration packets remain public-only so every reviewer can inspect the
 same artifacts. Private evidence may inform an individual assessment but cannot
@@ -61,6 +62,12 @@ enter a candidate or active anchor packet.
 | liyupi | full-stack developer education / community maintainer | 54 | 66 | 60 | 60 | 61 | Medium | Contributor-to-independent-builder boundary and education-impact packet |
 | Sunrisepeak | modern C++ build and package tooling / community maintainer | 78 | 78 | 64 | 78 | unknown (69 diagnostic) | Medium | Maintainer packet with AI-attribution, self-review, and concentrated-ecosystem sensitivity |
 | sheepbox8646 | multi-agent platform / isolated-workspace system owner | 74 | 73 | 69 | 73 | unknown (71 diagnostic) | Medium | System-owner packet with explicit AI attribution, release governance, and young-project durability sensitivity |
+| bagder | portable network-protocol library / security and release maintainer | 96 | 98 | 96 | 70 | 90 | High | Long-duration maintainer packet; high current depth with deliberately flat relative trajectory |
+| BurntSushi | Rust text-search, automata, and performance-library maintainer | 94 | 87 | 93 | 88 | 82 | High | Deep-library maintainer packet with explicit AI attribution and owner-concentration sensitivity |
+| FiloSottile | Go cryptography, specifications, and transparency systems | 96 | 94 | 94 | 95 | 93 | High | Cryptography/standards maintainer packet with independent review and tightly scoped project attribution |
+| yyx990803 | frontend framework/compiler ecosystem technical leader | 93 | 93 | 97 | 85 | 82 | High | Creator-maintainer packet with team-owned Vite/Rolldown outcomes explicitly discounted |
+| mitchellh | cross-platform terminal/runtime performance creator | 94 | 91 | 92 | 93 | 91 | High | Cross-domain creator-maintainer packet with explicit agent attribution and self-review sensitivity |
+| simonw | SQLite data and Python LLM/plugin ecosystem maintainer | 85 | 89 | 89 | 87 | unknown (68 diagnostic) | Medium | Maintainer-point-estimate packet with mixed AI implementation attribution and a gate-crossing E interval |
 
 Scores are whole-number displays calculated from whole or half subdimension
 anchors. See [`candidate-anchor-packets.md`](candidate-anchor-packets.md) for
