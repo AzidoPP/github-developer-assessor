@@ -29,6 +29,8 @@ reputation into a capability proxy.
 - Put provisional named-anchor evidence and score inputs in
   `references/candidate-anchor-packets.md`; keep activation status in
   `references/calibration.md`.
+- Put operator-facing inputs, examples, evidence-access notes, and runtime
+  observations in `docs/usage.md`.
 - Put machine-readable fields and learning-system guidance in `references/evidence-schema.md`.
 - Put output structure in `references/report-template.md`.
 

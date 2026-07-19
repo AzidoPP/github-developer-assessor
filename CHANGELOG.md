@@ -35,6 +35,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Optional authenticated assessment of user-selected private GitHub repositories,
   including repository selection, private artifact provenance, and evidence-
   boundary reporting.
+- An operator-facing usage guide covering inputs, assessment depth, prompt
+  examples, evidence-access paths, and dated personal runtime observations.
 
 ### Changed
 
@@ -49,6 +51,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Replaced the public-only hard boundary with public-by-default behavior plus
   explicitly authorized and selected private evidence; named calibration anchors
   remain public-only.
+- Streamlined the README around project orientation and first use. Version
+  migration details remain in this changelog, while learning-system guidance
+  remains in `references/evidence-schema.md`.
 
 ### Fixed
 
