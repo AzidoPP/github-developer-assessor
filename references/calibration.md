@@ -9,7 +9,8 @@ Score the observable evidence against the rubric first. Only then compare the re
 Calibration is versioned. Every calibration packet must record:
 
 - rubric version and snapshot date;
-- role lens, time window, and evidence boundary;
+- role lens, time window, evidence boundary, assessment depth, and source-
+  inspection status;
 - evidence URLs or archived identifiers;
 - E, S, I, and T dimension scores with rationales;
 - attribution and confidence notes;
@@ -41,6 +42,14 @@ interpretation or promoted to maintainer.
 
 Impact never substitutes for an E or S gate. A popular project can increase I; it cannot by itself establish implementation depth, architecture judgment, or maintainership.
 
+Do not assign a capability band in `quick`. In `standard`, E is an interval or
+`unknown` because Implementation quality is `not_assessed`. Apply a band only
+when the interval lower bound and qualitative evidence meet the gate, and state
+that the band does not include a source-level implementation-quality judgment.
+If the interval crosses a gate, report adjacent possible bands or Insufficient
+evidence. `deep` may produce a point E only when every subdimension has eligible
+evidence.
+
 ## 3. Candidate anchor registry
 
 Named anchors are useful only when backed by frozen, reproducible evidence
@@ -52,6 +61,14 @@ have not completed formal independent activation review and remain
 Named calibration packets remain public-only so every reviewer can inspect the
 same artifacts. Private evidence may inform an individual assessment but cannot
 enter a candidate or active anchor packet.
+
+The current candidate packets used targeted public source, diff, test, or build
+evidence where cited. Treat them as Deep-compatible legacy packets. Do not use
+their E point scores, subdimension anchors, or source-derived summaries as
+Standard evidence. A Standard assessment may use them for navigation and
+explicitly non-source S/I/T observations, but must re-derive every E anchor from
+eligible artifacts. If provenance cannot be separated, leave the affected
+subdimension `unknown`.
 
 | Candidate packet | Intended lens | E | S | I | T | R | Confidence | Candidate use |
 |---|---|---:|---:|---:|---:|---:|---|---|
@@ -104,6 +121,8 @@ Rules:
 3. If I or T is unknown, do not silently renormalize weights. Prefer no composite. If a provisional reduced-evidence score is necessary, show the omitted axes and recalculated weights explicitly.
 4. A composite does not override band gates or dimension-level concerns.
 5. Do not rank profiles built with different weights.
+6. Do not calculate a point composite in `quick` or while E is incomplete,
+   including the default `standard` boundary.
 
 ## 5. Cohort-relative comparisons
 
@@ -122,6 +141,10 @@ for every account. If one account includes selected private evidence and another
 does not, disclose that they are not directly comparable and report separate
 profiles, broad tiers, or intervals instead of a precise rank.
 
+Apply the same rule to source inspection. Do not exactly rank a Standard E
+interval against a Deep E point, or compare accounts whose source-inspection
+status differs, without reporting separate results or a sensitivity range.
+
 Prefer dimension-level percentiles over a single total. Use log transforms for long-tailed counts, winsorize obvious outliers, and apply Bayesian or empirical shrinkage to tiny samples. Report the raw observation alongside the normalized value.
 
 Never present a GitHub-wide percentile unless a defensible GitHub-wide sampling frame exists. “Top 5% among the 40 assessed TypeScript maintainer candidates in this 24-month snapshot” is acceptable; “top 5% of developers” is not.
@@ -130,7 +153,10 @@ Never present a GitHub-wide percentile unless a defensible GitHub-wide sampling 
 
 For standard and deep assessments:
 
-1. **Evidence pass:** inventory artifacts and score E/S/T without looking at followers, stars, sponsorship, employer prestige, or press where practical.
+1. **Evidence pass:** inventory artifacts and score only mode-eligible E/S/T
+   evidence without looking at followers, stars, sponsorship, employer prestige,
+   or press where practical. Standard leaves Implementation quality
+   `not_assessed`; Deep performs source inspection as a separate stage.
 2. **Context pass:** score I and R, then revisit only claims for which the new context supplies direct evidence.
 3. **Challenge pass:** identify the strongest alternative interpretation, missing counterevidence, and any score that would move by more than five points under a reasonable attribution change.
 
@@ -147,6 +173,8 @@ Run these checks before publishing a ranked table:
 - compare 12-, 24-, and 36-month windows when feasible;
 - check whether identity uncertainty or adding/removing authenticated private
   evidence would change the conclusion.
+- check whether adding a Deep source-inspection packet would move a Standard E
+  interval across a band gate.
 
 If rank order changes materially, report a tier or interval instead of a precise ordinal ranking.
 

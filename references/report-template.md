@@ -13,7 +13,34 @@
 - Cohort: `[optional; define population, date, and sample size, or not assessed]`
 - Evidence mode: `[public-only / public plus selected private repositories]`
 - Selected private repositories: `[none / names or user-approved aliases]`
+- Source inspection: `[none / targeted]`
+- Source review packets: `[none / packet IDs]`
 - Other evidence boundary: `[any explicitly listed external sources or exclusions]`
+
+## Quick Evidence Scan, quick only
+
+Do not complete the scored sections, capability band, relative placement, or
+profile score in `quick` mode. Return:
+
+- **Verified profile:** representative repositories, project classifications,
+  verified roles, and time span.
+- **Evidence map:** for E/S/I/T/R, list `verified evidence`, `provisional lead`,
+  `unresolved`, `contradictory evidence`, or `not_assessed`. These are evidence
+  states, not capability levels.
+- **Attribution clarity:** strongest verified implementation, decision,
+  verification, accountability, review, release, or governance roles.
+- **Strongest evidence:** two or three artifact-linked observations.
+- **Unknowns and counterevidence:** separate missing evidence from inspected
+  contradictions.
+- **Evidence readiness:** `limited / sufficient for standard / deep needed for
+  source-level claims`, with the reason.
+- **Recommended next step:** name the PRs, discussions, releases, time windows,
+  or source changes a later mode should inspect.
+
+State: `No source or diff inspection was performed. This scan does not assign
+numeric axes, a capability band, or a profile score.`
+
+Use the remaining sections only for `standard` and `deep`.
 
 ## Executive assessment
 
@@ -23,7 +50,7 @@
 
 | Axis | Score or status | Confidence | Interpretation | Strongest evidence |
 |---|---:|---|---|---|
-| Engineering capability (E) | /100 | | Criterion-referenced technical evidence | |
+| Engineering capability (E) | /100, interval, or unknown | | Criterion-referenced technical evidence | |
 | Stewardship and ownership (S) | /100 | | Sustained responsibility and contributor leverage | |
 | Ecosystem impact (I) | /100 or unknown | | Attributable adoption, authority, and leverage | |
 | Development trajectory (T) | /100 or unknown | | Direction of growth within the stated window | |
@@ -43,6 +70,11 @@ crosses a capability-band gate, report the adjacent possible bands rather than
 choosing one. `Insufficient evidence` is distinct from directly observed
 exploratory behavior.
 
+Use `not_assessed` when the selected mode intentionally excluded a
+subdimension. Use `unknown` when applicable inspection was attempted but
+evidence remained unavailable, insufficient, or ambiguous. Neither is zero;
+both contribute zero known weight and retain separate explanations.
+
 For every scored subdimension record:
 
 - whole or half anchor and confidence;
@@ -55,16 +87,30 @@ Do not replace this table with a single total.
 
 ## Engineering capability (E)
 
-| Subdimension | Anchor | Weight | Result | Evidence and reasoning |
-|---|---:|---:|---:|---|
-| Implementation quality | /5 | 20 | /20 | |
-| Architecture and interfaces | /5 | 25 | /25 | |
-| Problem solving and debugging | /5 | 20 | /20 | |
-| Correctness and reliability | /5 | 20 | /20 | |
-| Constraint depth | /5 | 15 | /15 | |
-| **E** | | **100** | **/100** | |
+| Subdimension | Status | Anchor | Weight | Result | Evidence and reasoning |
+|---|---|---:|---:|---:|---|
+| Implementation quality | | /5 | 20 | /20 | |
+| Architecture and interfaces | | /5 | 25 | /25 | |
+| Problem solving and debugging | | /5 | 20 | /20 | |
+| Correctness and reliability | | /5 | 20 | /20 | |
+| Constraint depth | | /5 | 15 | /15 | |
+| **E** | | | **100** | **/100 or interval** | |
 
 Explain any role-specific validation convention, such as hardware measurements, compiler regression suites, or production migration evidence.
+
+In `standard`, set Source inspection to `none`, mark Implementation quality
+`not_assessed`, and report E only as an interval or `unknown`. Score the other E
+subdimensions only from eligible non-source decision, review, lifecycle, or
+outcome evidence. State explicitly that implementation quality and source-level
+correctness were outside the assessment boundary.
+Do not copy E anchors from a Deep report or calibration packet. Record the
+eligible evidence surface used to re-derive every Standard E judgment; if the
+packet does not separate source-derived and non-source observations, mark the
+affected subdimension `unknown`.
+
+In `deep`, cite source review packet IDs for source-dependent scores. Targeted
+inspection permits a score only for the sampled evidence; it is not a whole-
+repository quality claim.
 
 ## Stewardship and ownership (S)
 
@@ -119,6 +165,8 @@ Never add R to E or describe rarity alone as engineering superiority.
 ## Optional profile score
 
 Include only if a selection question requires a composite.
+Omit it in `quick` and whenever E is incomplete, including `standard` under the
+default no-source-inspection boundary.
 
 - Profile: `[name]`
 - Formula and weights: `[for example, 0.40E + 0.30S + 0.25I + 0.05T]`
@@ -137,6 +185,7 @@ Call this a **profile score**, not an engineering score. Never compare scores pr
 
 - Classification: `personal-original / organization-owned / external contribution / fork / educational / other`
 - Observed role: `implementation / decision / verification / accountability / review / release / governance`
+- Evidence surface: `metadata / discussion / subject_review / ci_outcome / release / downstream / source / diff / test_implementation / local_execution`
 - Attribution interval and rationale:
 - Automation or AI involvement: `observed / reported / unknown`; effect on attribution:
 - Scope and constraints:
@@ -211,6 +260,10 @@ unlinked accounts, offline engineering, and contributions obscured by repository
 history or automation. Private artifact references may not be accessible to
 every report reader; state that as a reader-verifiability limitation without
 treating private visibility itself as weaker technical evidence.
+If Source inspection is `none`, state that implementation quality, source-level
+correctness, code structure, and test adequacy were not assessed. If it is
+`targeted`, identify the inspected packets and state that unsampled code remains
+outside the conclusion.
 Popularity, technology rarity, and organizational association are not
 substitutes for inspectable engineering evidence. The report should inform, not
 replace, technical interviews, work samples, and reference checks.

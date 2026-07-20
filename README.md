@@ -26,15 +26,28 @@ and scarcity is never added to capability.
 
 Only a GitHub username or profile URL is required. Unless the request says
 otherwise, the skill uses a general-engineering lens, standard depth, the most
-recent 24 months, no preset expected level, and no scarcity estimate.
+recent 24 months, no preset expected level, and no scarcity estimate. Standard
+does not inspect source files or diff contents; use Deep for code-quality or
+source-level correctness conclusions.
 
 > Assess `https://github.com/example` using the defaults.
 
 > Assess `example` for a senior backend role. Focus on the last 24 months,
 > inspect organization contributions, and cite the strongest evidence.
 
-> Compare A and B for an open-source maintainer role using the same snapshot,
-> evidence boundary, and scoring profile.
+> Compare A and B for an open-source maintainer role at deep depth using the
+> same snapshot, evidence boundary, and scoring profile.
+
+## Assessment modes
+
+| Mode | Result | Source inspection |
+|---|---|---|
+| Quick | Unscored evidence scan, attribution map, unknowns, and recommended next step | None |
+| Standard | GitHub behavior, responsibility, impact, and trajectory assessment; E is an interval or unknown | None |
+| Deep | Standard evidence plus targeted source review packets; complete E is possible when evidence permits | Targeted |
+
+The axes, weights, and anchors do not change by mode. A mode changes only which
+evidence may be inspected and therefore which conclusions are supportable.
 
 See [Usage and Runtime Notes](docs/usage.md) for every input, more prompt
 examples, public and selected-private evidence workflows, tool requirements,
@@ -49,6 +62,9 @@ and personally observed runtime.
 - Stars, followers, raw activity, organization membership, and project fame are
   navigation or context signals—not direct proof of capability.
 - Missing or inaccessible evidence is `unknown`, not zero.
+- Intentionally excluded evidence is `not_assessed`; Standard marks
+  Implementation quality this way instead of inferring it from repository
+  appearance, CI status, or activity.
 - AI or bot assistance changes attribution; it does not automatically erase
   evidenced specification, decisions, verification, or accountability.
 - Technology scarcity is optional and cohort-relative. It is not capability,
@@ -73,6 +89,8 @@ references below.
   — evidence-linked candidate packets pending independent activation review.
 - [Evidence Schema and Learning-Ready Data](references/evidence-schema.md) —
   machine-readable records and assisted-labeling guidance.
+- [Deep Source Inspection Protocol](references/source-inspection.md) — targeted
+  source review packets and claim limits, loaded only in Deep mode.
 - [Report Template](references/report-template.md) — reusable multi-axis output
   structure.
 - [Contributing](CONTRIBUTING.md) — contribution and validation guidance.

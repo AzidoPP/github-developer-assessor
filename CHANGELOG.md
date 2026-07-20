@@ -37,6 +37,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   boundary reporting.
 - An operator-facing usage guide covering inputs, assessment depth, prompt
   examples, evidence-access paths, and dated personal runtime observations.
+- A Deep-only source-inspection protocol and auditable source review packet
+  schema for targeted code, diff, test, and lifecycle inspection.
+- Subdimension-level `not_assessed` status and explicit source-inspection
+  metadata, separate from `unknown`, negative evidence, and confidence.
+- Evidence-surface provenance that prevents source-derived findings from being
+  reused as Standard evidence through summaries, prior reports, or anchor
+  packets.
 
 ### Changed
 
@@ -54,6 +61,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - Streamlined the README around project orientation and first use. Version
   migration details remain in this changelog, while learning-system guidance
   remains in `references/evidence-schema.md`.
+- Redefined Quick as an unscored evidence scan, made Standard explicitly free of
+  evaluator-side source, diff, and project-check inspection, and reserved
+  source-level code-quality conclusions for Deep. E/S/I/T/R/C definitions,
+  weights, anchors, and capability gates are unchanged.
+- Required Standard to mark Implementation quality `not_assessed` and report E
+  only as an interval or `unknown`, without renormalizing the remaining weight.
+- Removed the tracked distributable ZIP; source files are now the canonical
+  Skill distribution contents.
 
 ### Fixed
 

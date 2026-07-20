@@ -31,10 +31,18 @@ below.
 inaccessible, inapplicable to the sampled context, or too ambiguous to support a
 judgment. Never convert `unknown` to 0.
 
+`not_assessed` is also outside the scale. Use it when the selected assessment
+mode intentionally excludes a subdimension. It differs from `unknown`: no
+applicable inspection was attempted. Never convert `not_assessed` to 0 or treat
+it as negative evidence.
+
 ### Scoring and evidence rules
 
 - Score a subdimension only after inspecting applicable evidence and verifying
   at least weak attribution to the subject.
+- Score only evidence types permitted by the selected assessment mode. A
+  `quick` or `standard` assessment must not turn source-dependent impressions
+  into scored evidence.
 - Attach at least one concrete evidence item and an attribution rationale to
   every scored subdimension.
 - Use only whole or half anchors. A half point requires evidence of meaningful
@@ -55,6 +63,9 @@ judgment. Never convert `unknown` to 0.
 ### Axis completeness
 
 Calculate `known_weight` as the sum of weights for scored subdimensions.
+Both `unknown` and `not_assessed` contribute zero known weight, retain their
+distinct explanations, and remain bounded by 0–5 only for the mathematical
+axis interval.
 
 - `known_weight < 60`: report the axis as `unknown` and explain the missing
   evidence.
@@ -85,6 +96,30 @@ of the comparison set, popularity, employer, followers, or technology scarcity.
 Calculate:
 
 `E = sum(subdimension_score / 5 * weight)`
+
+### Source-inspection eligibility
+
+- Implementation quality requires direct inspection of source or diff contents
+  under the Deep Source Inspection Protocol. Mark it `not_assessed` in `quick`
+  and `standard` mode.
+- In `standard`, score Architecture and interfaces, Problem solving and
+  debugging, Correctness and reliability, or Constraint depth only from
+  explicit non-source evidence such as RFCs, issue and PR reasoning,
+  subject-authored reviews, CI and release outcomes, migrations, incidents, and
+  downstream consequences. Limit each claim to what that evidence establishes.
+- Evidence surface is inherited. A source-derived conclusion remains source-
+  derived when quoted in a summary, prior assessment, or calibration packet.
+  Standard must re-derive each E anchor from explicitly eligible non-source
+  observations; otherwise mark that subdimension `unknown`.
+- A passing CI run, test count, coverage number, linter result, release, or lack
+  of reported incidents does not by itself establish source-level correctness
+  or implementation quality.
+- Because Implementation quality is intentionally not assessed in `standard`,
+  Standard E is always an interval or `unknown`; do not report a point estimate
+  or renormalize the remaining 80 weight.
+- In `deep`, use source review packets from `source-inspection.md` for every
+  source-dependent score. Targeted source sampling still does not establish
+  whole-repository quality.
 
 ### Engineering behavioral anchors
 
@@ -251,6 +286,9 @@ Assign an overall confidence:
   or inaccessible work.
 
 For low confidence, prefer bands and qualitative ranges over precise totals.
+An assessment that intentionally omits source inspection has lower source-
+coverage completeness, not a lower developer score. Record the omitted surface
+as `not_assessed` and reflect it in C.
 
 ## 7. Interpretation rules
 
@@ -264,6 +302,8 @@ For low confidence, prefer bands and qualitative ranges over precise totals.
 
 ### Missing versus negative evidence
 
+- Intentionally excluded evidence: `not_assessed` under the selected mode. Do
+  not treat it as attempted inspection or developer weakness.
 - Missing evidence: unknown, inaccessible, or outside GitHub. Do not score as a
   demonstrated strength or weakness.
 - Negative evidence: an inspectable failure, regression pattern, abandoned

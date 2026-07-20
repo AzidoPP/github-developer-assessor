@@ -1,6 +1,6 @@
 ---
 name: github-developer-assessor
-description: Evidence-first, role-aware assessment of engineering capability, technical stewardship, ecosystem impact, and development trajectory from a GitHub account, using public evidence by default and user-authorized selected private repositories when a token is provided. Use when evaluating or comparing developers, reviewing GitHub experience, calibrating hiring evidence, or preparing technical interview questions. Separates criterion-referenced engineering ability from relative rank, ecosystem influence, technology scarcity, popularity, and evidence confidence.
+description: Evidence-first, role-aware assessment of engineering capability, technical stewardship, ecosystem impact, and development trajectory from a GitHub account, using public evidence by default and user-authorized selected private repositories when a token is provided. Use when evaluating or comparing developers, reviewing GitHub experience, calibrating hiring evidence, or preparing technical interview questions. Quick mode produces an evidence scan, standard mode evaluates GitHub behavior without evaluator-side source inspection, and deep mode adds the targeted source inspection required for source-level code-quality conclusions. Separates criterion-referenced engineering ability from relative rank, ecosystem influence, technology scarcity, popularity, and evidence confidence.
 ---
 
 # GitHub Developer Assessor
@@ -34,7 +34,10 @@ Optional:
   systems, security, developer tools, embedded, hardware, or another role.
 - `expected_level`: internship, junior, mid-level, senior, staff, or another
   comparison target. Treat it as a target, not a conclusion.
-- `depth`: `quick`, `standard`, or `deep`. Default: `standard`.
+- `depth`: `quick`, `standard`, or `deep`. Default: `standard`. Select `deep`
+  when the request explicitly asks for code quality, source-level correctness,
+  or implementation quality and does not name a depth. If the user explicitly
+  requests `standard`, preserve its no-source-inspection boundary.
 - `time_window`: Default: the most recent 24 months. Retain older evidence for
   durable ownership, maintenance, and impact.
 - `comparison_accounts`: Accounts to assess using identical scope and weights.
@@ -66,6 +69,8 @@ Read the references that apply before scoring:
 - Read `references/evidence-schema.md` when producing machine-readable output,
   collecting a benchmark dataset, automating evidence classification, or using
   private evidence.
+- Read `references/source-inspection.md` only for `deep` assessments. Do not
+  load or apply it in `quick` or `standard` mode.
 
 ## Non-negotiable rules
 
@@ -109,7 +114,17 @@ Read the references that apply before scoring:
     judgment.
 17. Use only whole or half anchors and obey the evidence-breadth and axis
     completeness rules in `references/rubric.md`. Do not silently renormalize
-    unknown subdimensions.
+    `unknown` or `not_assessed` subdimensions.
+18. Do not inspect source files or diff contents, or run builds, tests, static
+    analysis, or benchmarks, in `quick` or `standard` mode. Mark intentionally
+    excluded source-dependent claims `not_assessed`, not `unknown` or 0.
+    Subject-authored review comments remain eligible review evidence, but code
+    fragments quoted in discussion do not support Implementation quality.
+19. Preserve the original evidence surface through summaries, prior reports,
+    and calibration packets. Do not reuse a source-, diff-, test-, or local-run-
+    derived finding as Standard evidence merely because another assessor
+    summarized it. Re-derive Standard E claims from explicitly eligible
+    non-source artifacts or mark them `unknown`.
 
 ## Optional private repository workflow
 
@@ -129,6 +144,8 @@ When the user supplies `github_token`:
 5. Apply the same attribution, behavioral anchors, evidence-breadth rules, and
    negative-evidence rules used for public artifacts. Private visibility neither
    raises nor lowers an artifact's technical strength.
+   Apply the selected assessment mode equally: `quick` and `standard` may inspect
+   authorized discussions and lifecycle records but not private source or diffs.
 6. Do not infer ecosystem adoption from private repository existence alone.
    Score I only from inspectable use, leverage, authority, community, knowledge,
    or durability evidence within the authorized boundary.
@@ -148,31 +165,52 @@ calibration anchors remain public-evidence packets.
 
 ### Quick
 
-- Inspect the profile, visible organizations, and contribution surface.
-- Select up to 3 representative repositories.
-- Inspect at least 2 meaningful PRs, reviews, issues, or releases when available.
-- Sample a core code path, a correctness path, and project automation.
-- Score E and S when evidence permits; summarize I and T qualitatively.
+- Produce a **Quick Evidence Scan**, not a scored assessment.
+- Inspect the profile, visible organizations, contribution surface, and up to 3
+  representative repositories.
+- Inspect at least 2 meaningful PR descriptions or discussions, subject-authored
+  reviews, issues, releases, or governance artifacts when available.
+- Do not inspect source files, diff contents, or test implementation and do not
+  run project checks.
+- Report verified facts, an E/S/I/T/R evidence map, attribution clarity,
+  strongest leads and counterevidence, unknowns, confidence, and the recommended
+  next mode. Do not publish numeric axes, a capability band, or a profile score.
 
 ### Standard
 
 - Select 3–5 representative repositories across personal, organization,
   external, and long-lived contexts.
-- Inspect code, tests, CI, commits, PRs, reviews, issues, releases, maintenance,
-  and adoption evidence.
+- Inspect commit and PR metadata, PR descriptions and discussions,
+  subject-authored reviews, issues, RFCs, CI outcomes, releases, maintenance,
+  governance, and adoption evidence.
+- Do not inspect source files, diff contents, or test implementation and do not
+  run builds, tests, static analysis, or benchmarks.
 - Verify actual contribution and automation attribution.
-- Score E, S, I, and T independently.
-- Produce role fit, capability band, confidence, and interview probes.
+- Score S, I, and T when evidence permits. For E, mark Implementation quality
+  `not_assessed` and score only other subdimensions directly supported by
+  non-source evidence. Report E as an interval or `unknown`, never a point.
+- Do not carry E anchors or source-derived findings forward from a Deep report
+  or calibration packet. Use such material only to locate eligible PR
+  discussion, review, release, or outcome evidence and re-derive the judgment.
+- Produce role fit, confidence, interview probes, and a capability band only
+  when the E interval lower bound and qualitative evidence meet its gate. State
+  that source-level implementation quality was not assessed. Do not publish a
+  profile score while E remains incomplete.
 
 ### Deep
 
+- Complete the Standard evidence pass, then read and apply
+  `references/source-inspection.md` as a separate targeted inspection stage.
 - Trace major features from issue or design discussion through implementation,
   review, release, and follow-up.
-- Compare earlier and later code to evaluate evolution.
+- Create source review packets and compare earlier and later code when history
+  is available.
 - Inspect compatibility, performance, security, governance, and operational
   evidence where relevant.
 - Evaluate impact attribution and cohort normalization.
 - Include conflicting evidence, sensitivity analysis, and alternative readings.
+- Score a complete E point only when every subdimension has eligible evidence;
+  targeted inspection still does not establish whole-repository quality.
 
 ## Workflow
 
@@ -212,6 +250,9 @@ Classify repositories as:
 - `uncertain`
 
 Use `references/evidence-schema.md` for structured records.
+Record the evidence surface and inherited provenance for every observation used
+in scoring. A summary retains the most restrictive surface of the observation
+it summarizes.
 
 ### 3. Verify contribution and attribution
 
@@ -219,12 +260,18 @@ For every representative project determine:
 
 - creation, transfer, or import status;
 - contribution scope and time span;
-- affected core logic, tests, docs, CI, releases, or superficial files;
+- reported or metadata-visible affected core logic, tests, docs, CI, releases,
+  or superficial files; mark the scope unresolved when verification would
+  require a diff outside the selected mode;
 - authored PRs, reviews, issue handling, releases, and governance activity;
 - squash, rebase, co-author, bot, or agent effects on attribution;
 - implementation, decision, verification, and accountability roles.
 
-Use raw counts only to navigate. Inspect actual diffs and discussion.
+Use raw counts only to navigate. Inspect discussion in every applicable mode.
+Inspect actual diff contents only in `deep` mode under
+`references/source-inspection.md`. In `quick` or `standard`, use metadata and
+discussion to verify attribution and lower confidence when contribution scope
+cannot be resolved without a diff.
 
 ### 4. Select representative projects
 
@@ -240,26 +287,21 @@ Prefer evidence quality over popularity. Cover when available:
 Do not discard a small or hardware project because it lacks enterprise-scale
 infrastructure. Evaluate it against its real constraints.
 
-### 5. Sample code and correctness deliberately
+### 5. Perform source inspection in Deep only
 
-Inspect:
+Skip this step in `quick` and `standard`. Mark Implementation quality
+`not_assessed` and do not make source-level correctness or code-quality claims.
 
-- public API or entry point;
-- core domain, algorithm, or hardware-control path;
-- data or state model;
-- error, resource, concurrency, or recovery path;
-- tests for core behavior and edge cases;
-- build, CI, deployment, packaging, or release configuration;
-- at least one meaningful recent diff.
-
-Evaluate constraint complexity such as correctness, performance, concurrency,
-compatibility, platform, physical, operational, and collaboration constraints.
-Reward demonstrated handling of difficult constraints, not rarity by itself.
+In `deep`, read `references/source-inspection.md`, create source review packets,
+and follow its sampling, execution, packet, and claim-limit rules. Evaluate
+constraint complexity in its real domain context and reward demonstrated
+handling of difficult constraints, not rarity by itself.
 
 ### 6. Inspect problem solving and review behavior
 
-Look for reproduction, root-cause reasoning, trade-offs, regression tests,
-review response, scope control, follow-through, and prevention mechanisms.
+Look for documented reproduction, root-cause reasoning, trade-offs, validation
+outcomes, review response, scope control, follow-through, and prevention
+mechanisms. Inspect actual regression-test contents only in `deep`.
 
 For reviews, distinguish correctness, compatibility, performance, security, and
 maintainability reasoning from approvals or stylistic comments.
@@ -316,9 +358,17 @@ Use `references/rubric.md`:
 For every scored subdimension, record the anchor, evidence items, attribution
 status, evidence breadth, time span, contradictions, and confidence. Apply the
 single-artifact cap and repeated-evidence requirement before assigning 4 or 5.
-Do not average unknown values into zero. When an axis is incomplete, follow the
-known-weight rules to report `unknown` or an interval instead of silently
+Do not average `unknown` or `not_assessed` values into zero. `not_assessed`
+means the mode intentionally excluded the claim; `unknown` means applicable
+inspection was insufficient or ambiguous. When an axis is incomplete, follow
+the known-weight rules to report `unknown` or an interval instead of silently
 renormalizing it.
+
+- In `quick`, do not publish numeric axes.
+- In `standard`, mark Implementation quality `not_assessed`; E is therefore an
+  interval or `unknown`, never a point. Re-derive every scored E subdimension
+  from eligible non-source evidence; do not copy a Deep anchor or score.
+- In `deep`, score source-dependent dimensions only from source review packets.
 
 ### 11. Calibrate and optionally compose
 
@@ -332,9 +382,15 @@ Follow `references/calibration.md`.
 - Calculate a role-conditioned composite only when requested or useful, name the
   profile and weights, and keep the independent axes visible.
 
+Do not assign a capability band or composite in `quick`. In `standard`, apply a
+band only when the E interval lower bound and qualitative gate support it, state
+the no-source-inspection boundary, and report adjacent possible bands when the
+interval crosses a gate. Do not calculate a point composite from incomplete E.
+
 ### 12. Produce the report
 
-Use `references/report-template.md`. Include:
+Use the Quick Evidence Scan section of `references/report-template.md` for
+`quick`. Use the full report for `standard` and `deep`. Include:
 
 1. scope and assessment profile;
 2. executive assessment;
@@ -356,6 +412,12 @@ private artifact references, and never include the authentication token.
 
 Before returning an assessment, verify:
 
+- The reported assessment mode matches the evidence actually inspected.
+- Quick and Standard did not inspect source files or diff contents and did not
+  run builds, tests, static analysis, or benchmarks.
+- Standard marks Implementation quality `not_assessed`, does not report a point
+  E, and makes no source-level code-quality or correctness claim.
+- Every Deep source-dependent score traces to a source review packet.
 - Engineering capability did not change merely because the comparison set did.
 - Popularity did not leak into E or S.
 - Project fame was not inherited without contribution attribution.
@@ -364,10 +426,11 @@ Before returning an assessment, verify:
 - Hardware and niche projects were evaluated against appropriate constraints.
 - Open PRs affected trajectory, not realized impact, unless adopted elsewhere.
 - Representative anchors were applied only after independent scoring.
-- Every major claim has evidence or is marked unknown.
+- Every major claim has evidence or is marked `unknown` or `not_assessed`.
 - Confidence reflects evidence quality rather than developer quality.
 - Zero was used only for inspected negative or wholly unattributable evidence;
-  missing evidence remained unknown.
+  missing evidence remained `unknown` and intentionally excluded evidence
+  remained `not_assessed`.
 - Every 4 or 5 anchor satisfies the evidence-breadth requirement or documents a
   justified exception.
 - Private evidence came only from repositories explicitly selected by the user.

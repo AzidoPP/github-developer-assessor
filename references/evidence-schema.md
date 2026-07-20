@@ -17,6 +17,7 @@ Each evidence item should follow this conceptual JSON shape. Implementations may
   "repository": "org/repo",
   "visibility": "public",
   "classification": ["implementation", "review", "reliability"],
+  "evidence_surfaces": ["discussion", "subject_review", "release"],
   "observed_at": "2026-07-18T00:00:00Z",
   "event_date": "2026-06-02",
   "subject_identity": "github-login",
@@ -55,24 +56,74 @@ Each evidence item should follow this conceptual JSON shape. Implementations may
   locator. It is required when a private URL is omitted or will not be available
   to every report reader.
 - `classification` describes what the artifact can support; it is not a score.
+- `evidence_surfaces` records where each observation came from. Allowed values
+  include `metadata`, `discussion`, `subject_review`, `ci_outcome`, `release`,
+  `downstream`, `source`, `diff`, `test_implementation`, and `local_execution`.
+  Split a mixed artifact into separate observations when its claims come from
+  different surfaces.
 - attribution shares are intervals, not invented precision.
 - unknown automation use is `unknown`, not `none`.
 - outcome and impact describe observed consequences, not inferred fame.
 - one artifact may support several dimensions, but each scoring use must be justified and double counting checked.
+- inherited summaries retain the original observation surfaces. A prior report,
+  anchor packet, or model output cannot convert source-derived evidence into a
+  Standard-eligible observation.
+
+### Source review packet, deep only
+
+Create this record only after applying `source-inspection.md` in `deep` mode:
+
+```json
+{
+  "id": "sr-001",
+  "artifact_ref": "org/repo#pull-123@abc1234",
+  "base_revision": "def5678",
+  "head_revision": "abc1234",
+  "role_lens": "backend",
+  "constraints": ["backward compatibility", "concurrency"],
+  "inspected_paths": ["src/cache.ts", "test/cache.test.ts"],
+  "checks": [
+    {
+      "command": "npm test -- cache.test.ts",
+      "status": "passed",
+      "observation": "targeted regression suite passed"
+    }
+  ],
+  "supported_dimensions": {
+    "implementation_quality": "reviewed before-and-after implementation and failure handling",
+    "correctness_and_reliability": "reviewed regression tests and release follow-up"
+  },
+  "counterevidence": [],
+  "limitations": ["production incident history unavailable"],
+  "confidence": 0.78
+}
+```
+
+Static metrics and check results are observations, not scores. A packet supports
+only the inspected artifact and does not establish whole-repository quality.
 
 ## 2. Assessment record
 
 ```json
 {
-  "schema_version": "2.1",
+  "schema_version": "2.2",
   "rubric_version": "2.0",
   "subject": "github-login",
   "snapshot_date": "2026-07-18",
   "time_window_months": 24,
+  "depth": "deep",
   "evidence_boundary": {
     "mode": "public_only",
     "selected_private_repositories": [],
     "private_selection": "none"
+  },
+  "source_inspection": {
+    "status": "targeted",
+    "reason": "deep_mode",
+    "source_files_read": true,
+    "diffs_read": true,
+    "tests_or_builds_run": true,
+    "packet_ids": ["sr-001"]
   },
   "role_lenses": ["backend", "maintainer"],
   "profile": "maintainer",
@@ -90,6 +141,7 @@ Each evidence item should follow this conceptual JSON shape. Implementations may
           "anchor": 3.5,
           "weight": 20,
           "evidence_ids": ["ev-001"],
+          "source_review_packet_ids": ["sr-001"],
           "evidence_count": 1,
           "independent_contexts": 1,
           "time_span_months": 1,
@@ -106,6 +158,7 @@ Each evidence item should follow this conceptual JSON shape. Implementations may
           "anchor": 4,
           "weight": 25,
           "evidence_ids": ["ev-002", "ev-003"],
+          "source_review_packet_ids": [],
           "evidence_count": 2,
           "independent_contexts": 1,
           "time_span_months": 9,
@@ -119,6 +172,7 @@ Each evidence item should follow this conceptual JSON shape. Implementations may
           "anchor": 4,
           "weight": 20,
           "evidence_ids": ["ev-004", "ev-005"],
+          "source_review_packet_ids": [],
           "evidence_count": 2,
           "independent_contexts": 2,
           "time_span_months": 11,
@@ -132,6 +186,7 @@ Each evidence item should follow this conceptual JSON shape. Implementations may
           "anchor": 3,
           "weight": 20,
           "evidence_ids": ["ev-001", "ev-006"],
+          "source_review_packet_ids": ["sr-001"],
           "evidence_count": 2,
           "independent_contexts": 1,
           "time_span_months": 8,
@@ -145,6 +200,7 @@ Each evidence item should follow this conceptual JSON shape. Implementations may
           "anchor": 4,
           "weight": 15,
           "evidence_ids": ["ev-004", "ev-007"],
+          "source_review_packet_ids": [],
           "evidence_count": 2,
           "independent_contexts": 2,
           "time_span_months": 14,
@@ -191,10 +247,53 @@ incomplete axis stores `score` as `null`, `range` as `[low, high]` when at least
 60 weighted points are known, and `known_weight`. Below that threshold it stores
 an `unknown` status and explanation.
 
-A subdimension `status` is `scored` or `unknown`. A missing subdimension uses a
-null anchor with an explanation; it is never zero. Anchors are whole or half
-points only. Record evidence breadth and any exception to the normal
-single-artifact cap so high anchors remain auditable.
+A subdimension `status` is `scored`, `unknown`, or `not_assessed`. `unknown`
+means applicable inspection was attempted but remained insufficient or
+ambiguous. `not_assessed` means the selected mode intentionally excluded the
+claim. Both use a null anchor with an explanation, contribute zero
+`known_weight`, and are never zero. Anchors are whole or half points only.
+Record evidence breadth and any exception to the normal single-artifact cap so
+high anchors remain auditable.
+
+For every scored E subdimension, include `source_review_packet_ids`. Use a
+non-empty list when source or diff contents support the score and an empty list
+when the score rests entirely on eligible non-source evidence.
+
+`source_inspection.status` is `none` or `targeted`; never call a sample `full`.
+For `quick` and `standard`, set it to `none`, set all three inspection booleans
+to false, and use an empty `packet_ids` list. In `standard`, Implementation
+quality is `not_assessed`, so E is an interval or `unknown`, never a point. A
+minimal Standard E record is:
+
+```json
+{
+  "depth": "standard",
+  "source_inspection": {
+    "status": "none",
+    "reason": "standard_mode",
+    "source_files_read": false,
+    "diffs_read": false,
+    "tests_or_builds_run": false,
+    "packet_ids": []
+  },
+  "axes": {
+    "E": {
+      "status": "interval",
+      "score": null,
+      "range": [58, 78],
+      "known_weight": 80,
+      "dimensions": {
+        "implementation_quality": {
+          "status": "not_assessed",
+          "anchor": null,
+          "weight": 20,
+          "explanation": "Standard mode excludes source inspection."
+        }
+      }
+    }
+  }
+}
+```
 
 `evidence_boundary.mode` is `public_only` or
 `public_plus_selected_private`. In private mode,
@@ -222,7 +321,10 @@ Do not expose identity, follower counts, stars, employer, or project popularity 
 A safe staged approach is:
 
 1. Build a small, independently double-labeled gold set stratified by domain, band, and artifact type.
-2. Use deterministic extractors for dates, repository relationships, review state, CI, release linkage, and code statistics.
+2. Use deterministic extractors for dates, repository relationships, review
+   state, CI, and release linkage. Collect code statistics only inside an
+   authorized Deep source-inspection workflow and keep them as observations,
+   not scores.
 3. Use language models or heuristics as weak labelers that emit evidence spans, a label, and confidence—not as ground truth.
 4. Combine weak labels with a label model or calibrated voting process.
 5. Add pseudo-labeled samples only above a validated confidence threshold and keep their origin visible.
@@ -267,7 +369,7 @@ The target is consistent evidence interpretation, not imitation of every histori
 When JSON is impractical, use one row per evidence-to-dimension judgment:
 
 ```text
-assessment_id,evidence_id,subject,snapshot_date,role_lens,axis,dimension,anchor_0_5,weight,attribution_low,attribution_high,confidence,visibility,artifact_ref,url
+assessment_id,evidence_id,source_review_packet_ids,evidence_surfaces,subject,snapshot_date,depth,source_inspection_status,role_lens,axis,dimension,dimension_status,anchor_0_5,weight,attribution_low,attribution_high,confidence,visibility,artifact_ref,url
 ```
 
 Keep person-level totals in a separate table. This prevents aggregation from erasing the evidence provenance needed for audit and relabeling.

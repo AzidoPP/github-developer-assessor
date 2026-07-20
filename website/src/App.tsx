@@ -411,6 +411,12 @@ function InstructionsModal({ onClose }: { onClose: () => void }) {
               structured, evidence-linked ESITRC assessment with traceable references.
             </li>
           </ol>
+          <p>
+            <strong style={{ color: "var(--color-fg)" }}>Choose the evidence depth</strong> —
+            Quick is an unscored evidence scan. Standard evaluates contribution, decisions,
+            stewardship, impact, and trajectory without reading source or diff contents. Deep adds
+            targeted source review packets and is required for source-level code-quality claims.
+          </p>
           <div
             className="mt-4 rounded-xl border p-4 text-xs"
             style={{

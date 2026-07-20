@@ -33,6 +33,8 @@ reputation into a capability proxy.
   observations in `docs/usage.md`.
 - Put machine-readable fields and learning-system guidance in `references/evidence-schema.md`.
 - Put output structure in `references/report-template.md`.
+- Put Deep-only evaluator source and diff inspection rules in
+  `references/source-inspection.md`; do not duplicate them in Standard guidance.
 
 Avoid duplicating detailed rules across files. Link to the authoritative reference instead.
 
@@ -54,12 +56,22 @@ Every change must preserve these boundaries:
    and cannot represent missing or inaccessible evidence.
 10. Anchors use whole or half points only. Scores of 4 and 5 require the evidence
     breadth defined in `references/rubric.md` or a documented exception.
+11. Quick is an unscored evidence scan. Standard does not inspect source or diff
+    contents or run project checks. Deep is the only mode that applies the
+    source-inspection protocol.
+12. `not_assessed` means the mode intentionally excluded a claim; `unknown`
+    means applicable inspection was attempted but remained insufficient or
+    ambiguous. Neither is zero.
+13. Evidence retains its original surface through summaries, prior reports, and
+    calibration packets. Standard cannot reuse source-derived E findings without
+    re-deriving them from eligible non-source artifacts.
 
 ## Calibration contributions
 
 A named person becomes an active calibration anchor only through a frozen evidence packet containing:
 
-- rubric version, snapshot date, role lens, and time window;
+- rubric version, snapshot date, role lens, time window, assessment depth, and
+  source-inspection status;
 - public evidence URLs and artifact-level attribution;
 - dimension scores and confidence rationale;
 - alternative interpretations and known blind spots;
@@ -91,6 +103,7 @@ candidate or active anchor packet.
    artifact reference; otherwise mark the claim unknown.
 5. Update `CHANGELOG.md` for user-visible changes.
 6. Explain whether the change affects score comparability with earlier rubric versions.
+7. Explain whether it changes the Quick, Standard, or Deep evidence boundary.
 
 ## Validation
 
@@ -103,6 +116,11 @@ Before proposing a change:
   `unknown` as a numeric anchor;
 - verify that incomplete axes use `unknown` or an interval without silent
   renormalization;
+- verify that Quick emits no numeric axes, band, or composite;
+- verify that Standard does not inspect source or diff contents, does not run
+  project checks, marks Implementation quality `not_assessed`, and never emits a
+  point E;
+- verify that every Deep source-dependent score cites a source review packet;
 - search for contradictions between the workflow, rubric, calibration rules, evidence schema, and report template;
 - verify that public-only behavior still works without a token and that private
   contents are not inspected before repository selection;

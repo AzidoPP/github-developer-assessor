@@ -13,6 +13,10 @@ Use this reference only when applying or auditing a named candidate anchor from
   registries, project sites, course pages, and library catalogs. Profile
   followers, stars, forks, and views are attention signals, not engineering or
   adoption evidence by themselves.
+- Source-inspection boundary: targeted public source, diff, test, and build
+  evidence was used where cited. Treat these as Deep-compatible legacy packets,
+  not exact Standard E comparators, until a second reviewer records the current
+  source-inspection metadata.
 - Status: provisional candidate packets. They have not completed the formal
   independent activation review below and are not normative anchors.
 - Calculation: scored axes have `known_weight = 100`. Displayed scores are
@@ -1104,3 +1108,5 @@ Before promoting a packet from candidate to active anchor:
    sensitivity checks.
 5. Version the activated packet against the rubric and retain this provisional
    snapshot for drift analysis.
+6. Record assessment depth, source-inspection status, and source review packet
+   identifiers for every source-dependent E score.
